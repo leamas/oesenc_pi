@@ -75,7 +75,7 @@
         #include <GL/glext.h>
         #ifndef __WXMSW__
             #include <GL/glx.h>
-        #endif    
+        #endif
     #else
         #include <qopengl.h>
         #include <GL/gl_private.h>              // this is a cut-down version of gl.h
@@ -113,7 +113,7 @@ void init_GLLibrary();
 
 bool IsDongleAvailable();
 
-#include <wx/arrimpl.cpp> 
+#include <wx/arrimpl.cpp>
 WX_DEFINE_OBJARRAY(EULAArray);
 
 //      Some PlugIn global variables
@@ -263,26 +263,26 @@ static int ExtensionCompare( const wxString& first, const wxString& second )
 #if 1
 class  OESENC_HTMLMessageDialog: public wxDialog
 {
-    
+
 public:
     OESENC_HTMLMessageDialog(wxWindow *parent, const wxString& message,
                              const wxString& caption = wxMessageBoxCaptionStr,
-                             long style = wxOK|wxCENTRE,  
+                             long style = wxOK|wxCENTRE,
                              bool bFixedFont = false,
                              const wxPoint& pos = wxDefaultPosition);
     ~OESENC_HTMLMessageDialog();
-    
+
     void OnYes(wxCommandEvent& event);
     void OnNo(wxCommandEvent& event);
     void OnCancel(wxCommandEvent& event);
     void OnClose( wxCloseEvent& event );
     void OnTimer(wxTimerEvent &evt);
-    
-    
+
+
 private:
     int m_style;
     wxTimer m_timer;
-    
+
     DECLARE_EVENT_TABLE()
 };
 
@@ -312,22 +312,22 @@ OESENC_HTMLMessageDialog::OESENC_HTMLMessageDialog( wxWindow *parent,
         wxFont *qFont = wxTheFontList->FindOrCreateFont( font_size,wxFONTFAMILY_TELETYPE, dFont->GetStyle(), dFont->GetWeight());
         SetFont( *qFont );
     }
-    
+
     wxBoxSizer *topsizer = new wxBoxSizer( wxVERTICAL );
-    
+
     wxHtmlWindow *msgWindow = new wxHtmlWindow( this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
                                                 wxHW_SCROLLBAR_AUTO | wxHW_NO_SELECTION );
     msgWindow->SetBorders( 1 );
-    
+
     topsizer->Add( msgWindow, 1, wxALIGN_CENTER_HORIZONTAL | wxEXPAND, 5 );
-    
+
     wxString html;
     html << message;
-    
+
     wxCharBuffer buf = html.ToUTF8();
     if( buf.data() )                            // string OK?
        msgWindow->SetPage( html );
-    
+
     // 3) buttons
        int AllButtonSizerFlags = wxOK|wxCANCEL|wxYES|wxNO|wxHELP|wxNO_DEFAULT;
        int center_flag = wxEXPAND;
@@ -336,23 +336,23 @@ OESENC_HTMLMessageDialog::OESENC_HTMLMessageDialog( wxWindow *parent,
        wxSizer *sizerBtn = CreateSeparatedButtonSizer(style & AllButtonSizerFlags);
        if ( sizerBtn )
            topsizer->Add(sizerBtn, 0, center_flag | wxALL, 10 );
-       
+
        SetSizer( topsizer );
-       
+
        topsizer->Fit( this );
-       
+
        wxSize szyv = msgWindow->GetVirtualSize();
-       
-       SetClientSize(szyv.x + 20, szyv.y + 20); 
-       
+
+       SetClientSize(szyv.x + 20, szyv.y + 20);
+
        //Centre( /*wxBOTH | wxCENTER_FRAME*/);
        CentreOnParent();
        m_timer.SetOwner( this, -1 );
-       
+
        int timeout_sec = 60;
        if(timeout_sec > 0)
            m_timer.Start( timeout_sec * 1000, wxTIMER_ONE_SHOT );
-       
+
 }
 
 OESENC_HTMLMessageDialog::~OESENC_HTMLMessageDialog()
@@ -411,25 +411,25 @@ void OESENC_HTMLMessageDialog::OnTimer(wxTimerEvent &evt)
 #if 0
 class  OESENC_HTMLMessageDialog: public wxWindow
 {
-    
+
 public:
     OESENC_HTMLMessageDialog(wxWindow *parent, const wxString& message,
                              const wxString& caption = wxMessageBoxCaptionStr,
-                             long style = wxOK|wxCENTRE,  
+                             long style = wxOK|wxCENTRE,
                              bool bFixedFont = false,
                              const wxPoint& pos = wxDefaultPosition);
-    
+
     void OnYes(wxCommandEvent& event);
     void OnNo(wxCommandEvent& event);
     void OnCancel(wxCommandEvent& event);
     void OnClose( wxCloseEvent& event );
     void OnTimer(wxTimerEvent &evt);
-    
-    
+
+
 private:
     int m_style;
     wxTimer m_timer;
-    
+
     DECLARE_EVENT_TABLE()
 };
 
@@ -458,22 +458,22 @@ OESENC_HTMLMessageDialog::OESENC_HTMLMessageDialog( wxWindow *parent,
         wxFont *qFont = wxTheFontList->FindOrCreateFont( font_size,wxFONTFAMILY_TELETYPE, dFont->GetStyle(), dFont->GetWeight());
         SetFont( *qFont );
     }
-    
+
     wxBoxSizer *topsizer = new wxBoxSizer( wxVERTICAL );
-    
+
     wxHtmlWindow *msgWindow = new wxHtmlWindow( this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
                                                 wxHW_SCROLLBAR_AUTO | wxHW_NO_SELECTION );
     msgWindow->SetBorders( 1 );
-    
+
     topsizer->Add( msgWindow, 1, wxALIGN_CENTER_HORIZONTAL | wxEXPAND, 5 );
-    
+
     wxString html;
     html << message;
-    
+
     wxCharBuffer buf = html.ToUTF8();
     if( buf.data() )                            // string OK?
        msgWindow->SetPage( html );
- /*   
+ /*
     // 3) buttons
        int AllButtonSizerFlags = wxOK|wxCANCEL|wxYES|wxNO|wxHELP|wxNO_DEFAULT;
        int center_flag = wxEXPAND;
@@ -485,23 +485,23 @@ OESENC_HTMLMessageDialog::OESENC_HTMLMessageDialog( wxWindow *parent,
        */
 
        SetSizer( topsizer );
-       
+
        topsizer->Fit( this );
-       
+
        wxSize szyv = msgWindow->GetVirtualSize();
-       
-       SetClientSize(szyv.x + 20, szyv.y + 20); 
-       SetClientSize(600, szyv.y + 20); 
-       
+
+       SetClientSize(szyv.x + 20, szyv.y + 20);
+       SetClientSize(600, szyv.y + 20);
+
        //Centre( /*wxBOTH | wxCENTER_FRAME*/);
        CentreOnParent();
        m_timer.SetOwner( this, -1 );
-       
+
        int timeout_sec = 10;
        if(timeout_sec > 0)
            m_timer.Start( timeout_sec * 1000, wxTIMER_ONE_SHOT );
        Hide();
-       
+
 }
 
 void OESENC_HTMLMessageDialog::OnYes(wxCommandEvent& WXUNUSED(event))
@@ -572,7 +572,7 @@ oesenc_pi::oesenc_pi(void *ppimgr)
       vs.Printf(_T("%d.%d.%d"), PLUGIN_VERSION_MAJOR, PLUGIN_VERSION_MINOR, PLUGIN_VERSION_PATCH);
       g_versionString = vs;
       g_GenericMessageShown =false;
-      
+
       // Create the PlugIn icons
       m_pplugin_icon = new wxBitmap(default_pi);
 
@@ -580,7 +580,7 @@ oesenc_pi::oesenc_pi(void *ppimgr)
 
       g_event_handler = new oesenc_pi_event_handler(this);
 
-     
+
       g_bSENCutil_valid = false;                // not confirmed yet
 
 
@@ -604,7 +604,7 @@ oesenc_pi::oesenc_pi(void *ppimgr)
       g_PrivateDataDir += wxFileName::GetPathSeparator();
       if(!::wxDirExists( g_PrivateDataDir ))
           ::wxMkdir( g_PrivateDataDir );
-      
+
       m_up_text = NULL;
       m_pOptionsPage = 0;
 
@@ -612,7 +612,7 @@ oesenc_pi::oesenc_pi(void *ppimgr)
       ScrubChartinfoList(  );
       g_bEULA_Rejected = false;
       g_bEULA_Rejected = !ShowAlwaysEULAs();
-      
+
 
       //        Set up a common data location,
       //        Using a config file specified location if found
@@ -639,7 +639,7 @@ oesenc_pi::~oesenc_pi()
 
 int oesenc_pi::Init(void)
 {
-    
+
     //  Get the path of the PlugIn itself
     g_pi_filename = GetPlugInPath(this);
 
@@ -648,23 +648,23 @@ int oesenc_pi::Init(void)
       //    Build an arraystring of dynamically loadable chart class names
     m_class_name_array.Add(_T("eSENCChart"));
 
-     
+
     //        Specify the location of the oeserverd helper.
     wxFileName fn_exe(GetOCPN_ExePath());
     g_sencutil_bin = fn_exe.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR) + _T("oeserverd");
-       
-    
+
+
 #ifdef __WXMSW__
     g_sencutil_bin = _T("\"") + fn_exe.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR) +
     _T("plugins\\oesenc_pi\\oeserverd.exe\"");
 #endif
-    
+
 #ifdef __WXOSX__
     fn_exe.RemoveLastDir();
     g_sencutil_bin = _T("\"") + fn_exe.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR) +
     _T("PlugIns/oesenc_pi/oeserverd\"");
 #endif
-    
+
 #ifdef __OCPN__ANDROID__
     wxString piLocn = GetPlugInPath(this); //*GetpSharedDataLocation();
     wxFileName fnl(piLocn);
@@ -685,7 +685,7 @@ int oesenc_pi::Init(void)
 #ifdef __WXMAC__
     // Set environment variable to find the required sglock dongle library
     wxString libDir = _T("\"") + fn_exe.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR) + _T("PlugIns/oesenc_pi" _T("\""));
-    wxSetEnv(_T("DYLD_LIBRARY_PATH"), libDir ); 
+    wxSetEnv(_T("DYLD_LIBRARY_PATH"), libDir );
     wxLogMessage(_T("OSX LIB DYLD_LIBRARY_PATH: ") + libDir);
 #endif
 
@@ -695,44 +695,44 @@ int oesenc_pi::Init(void)
         wxLogMessage(_T("Dongle OK"));
     else
         wxLogMessage(_T("Dongle NOT FOUND"));
-        
+
     g_benable_screenlog = g_buser_enable_screenlog;
-    
+
     g_ChartInfoArray.Clear();
-   
+
     testSENCServer();
-    
+
     int flags =  INSTALLS_PLUGIN_CHART_GL |
                  WANTS_PLUGIN_MESSAGING   |
                  WANTS_OVERLAY_CALLBACK   |
                  WANTS_OPENGL_OVERLAY_CALLBACK;
 
     flags |= INSTALLS_TOOLBOX_PAGE;             // for o-charts shop interface
-    flags |= WANTS_PREFERENCES;             
+    flags |= WANTS_PREFERENCES;
 
     init_S52Library();
-    
+
     return flags;
-    
+
 }
 
 bool oesenc_pi::DeInit(void)
 {
     SaveConfig();
-    
+
     delete pinfoDlg;
     pinfoDlg = NULL;
-    
+
     if( m_pOptionsPage )
     {
         if( DeleteOptionsPage( m_pOptionsPage ) )
             m_pOptionsPage = NULL;
     }
-    
+
     m_class_name_array.Clear();
-    
+
     shutdown_SENC_server();
-    
+
     return true;
 }
 
@@ -788,7 +788,7 @@ wxArrayString oesenc_pi::GetDynamicChartClassNameArray()
 
 void oesenc_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
 {
-    
+
     if(message_id == _T("OpenCPN Config"))
     {
 
@@ -809,11 +809,11 @@ void oesenc_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
         g_coreVersionMajor = root[_T("OpenCPN Version Major")].AsInt();
         g_coreVersionMinor = root[_T("OpenCPN Version Minor")].AsInt();
         g_coreVersionPatch = root[_T("OpenCPN Version Patch")].AsInt();
-        
-        
+
+
         // Capture the S52PLIB configuration
         if(ps52plib){
-            
+
             //  We may need a reconfig of global settings
             // If so, do it first, then overide some values per-canvas.
             if(root[_T("OpenCPN S52PLIB GlobalReconfig")].IsBool()){
@@ -831,13 +831,13 @@ void oesenc_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
             if(root[_T("OpenCPN S52PLIB ShowLightDescription")].IsBool()) ps52plib->SetShowLdisText( root[_T("OpenCPN S52PLIB ShowLightDescription")].AsBool() );
             if(root[_T("OpenCPN S52PLIB ShowATONLabel")].IsBool())        ps52plib->SetShowAtonText( root[_T("OpenCPN S52PLIB ShowATONLabel")].AsBool() );
             if(root[_T("OpenCPN S52PLIB ShowQualityOfData")].IsBool())    ps52plib->SetQualityOfData( root[_T("OpenCPN S52PLIB ShowQualityOfData")].AsBool() );
-            
+
             if(root[_T("OpenCPN S52PLIB MetaDisplay")].IsBool())           ps52plib->m_bShowMeta = root[_T("OpenCPN S52PLIB MetaDisplay")].AsBool();
             if(root[_T("OpenCPN S52PLIB DeclutterText")].IsBool())         ps52plib->m_bDeClutterText = root[_T("OpenCPN S52PLIB DeclutterText")].AsBool();
             if(root[_T("OpenCPN S52PLIB ShowNationalText")].IsBool())      ps52plib->m_bShowNationalTexts = root[_T("OpenCPN S52PLIB ShowNationalText")].AsBool();
             if(root[_T("OpenCPN S52PLIB UseSCAMIN")].IsBool())             ps52plib->m_bUseSCAMIN = root[_T("OpenCPN S52PLIB UseSCAMIN")].AsBool();
             if(root[_T("OpenCPN S52PLIB ShowImportantTextOnly")].IsBool()) ps52plib->m_bShowS57ImportantTextOnly = root[_T("OpenCPN S52PLIB ShowImportantTextOnly")].AsBool();
-        
+
             if(root[_T("OpenCPN S52PLIB SymbolStyle")].IsInt())           ps52plib->m_nSymbolStyle = (LUPname)root[_T("OpenCPN S52PLIB SymbolStyle")].AsInt();
             if(root[_T("OpenCPN S52PLIB BoundaryStyle")].IsInt())         ps52plib->m_nBoundaryStyle = (LUPname)root[_T("OpenCPN S52PLIB BoundaryStyle")].AsInt();
             if(root[_T("OpenCPN S52PLIB ColorShades")].IsDouble())        S52_setMarinerParam( S52_MAR_TWO_SHADES, root[_T("OpenCPN S52PLIB ColorShades")].AsDouble());
@@ -847,7 +847,7 @@ void oesenc_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
                 _DisCat dcat = (_DisCat)icat;
                 ps52plib->SetDisplayCategory( dcat );
             }
-            
+
                             // Detect and manage "LIGHTS" toggle
             if(root[_T("OpenCPN S52PLIB ShowLights")].IsBool()){
                 bool bNewVal = root[_T("OpenCPN S52PLIB ShowLights")].AsBool();
@@ -859,42 +859,42 @@ void oesenc_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
 //                         ps52plib->RemoveObjNoshow("LIGHTS");
                     }
             }
-            
 
-            
+
+
             ps52plib->SetOCPNVersion( g_coreVersionMajor, g_coreVersionMinor, g_coreVersionPatch);
-            
+
          }
-        
+
         if(root[_T("OpenCPN Zoom Mod Vector")].IsInt())
             g_chart_zoom_modifier_vector = root[_T("OpenCPN Zoom Mod Vector")].AsInt();
 
         if(root[_T("OpenCPN Display Width")].IsInt()){
             g_display_size_mm = (double)root[_T("OpenCPN Display Width")].AsInt();
-            
+
             wxWindow *cc1 = GetOCPNCanvasWindow();
             if(cc1){
                 int display_size_mm = wxMax(g_display_size_mm, 75);
-                
+
                 int sx, sy;
                 wxDisplaySize( &sx, &sy );
                 double max_physical = wxMax(sx, sy);
-                
+
                 double pix_per_mm = ( max_physical ) / ( (double) display_size_mm );
                 if(ps52plib)
                     ps52plib->SetPPMM( pix_per_mm );
-                
+
                 g_pix_per_mm = pix_per_mm;
-                
+
                 wxString msg;
                 msg.Printf(_T("oesenc_pi:  Calculated pix/mm = %g"), g_pix_per_mm);
                 wxLogMessage(msg);
             }
         }
-        
+
         if(ps52plib)
             ps52plib->GenerateStateHash();
-            
+
     }
     else if(message_id == _T("OCPN_OPENGL_CONFIG"))
     {
@@ -902,7 +902,7 @@ void oesenc_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
         wxJSONValue  root;
         // construct a JSON parser
         wxJSONReader reader;
-        
+
         // now read the JSON text and store it in the 'root' structure
         // check for errors before retreiving values...
         int numErrors = reader.Parse( message_body, &root );
@@ -910,13 +910,13 @@ void oesenc_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
             //              const wxArrayString& errors = reader.GetErrors();
             return;
         }
-        
+
         //float g_GLMinCartographicLineWidth;
         // is global ...bool  g_b_EnableVBO;
         //float g_GLMinSymbolLineWidth;
         //GLenum g_texture_rectangle_format;
         //bool pi_bopengl;
-        
+
         // Capture the OpenCPN OpenGL config, and inform the PLIB
         if( root[_T("setupComplete")].AsBool() )
         {
@@ -927,21 +927,21 @@ void oesenc_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
             g_b_useStencilAP = root[_T("useStencilAP")].AsBool();
             g_b_useScissorTest = root[_T("useScissorTest")].AsBool();
             g_b_useFBO = root[_T("useFBO")].AsBool();
-        
+
             g_GLOptionsSet = true;
-            
+
             init_GLLibrary();                                  // once
             g_oeChartSymbols->ResetRasterTextureCache();
- 
+
         }
     }
-        
+
 }
 
 void oesenc_pi::SetColorScheme(PI_ColorScheme cs)
 {
     global_color_scheme = cs;
-    
+
     if(ps52plib)
         ps52plib-> SetPLIBColorScheme((ColorScheme)cs);
 }
@@ -977,7 +977,7 @@ bool oesenc_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
 
 bool oesenc_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 {
-#ifndef USE_ANDROID_GLES2    
+#ifndef USE_ANDROID_GLES2
     if(g_brendered_expired && !g_bnoShow_sse25){
         wxString msg = _T("SSE 25..The ENC permit for this cell has expired.\n This cell may be out of date and MUST NOT be used for NAVIGATION.");
 
@@ -1011,7 +1011,7 @@ bool oesenc_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
         g_brendered_expired = false;
 
     }
-#endif    
+#endif
     return false;
 }
 
@@ -1027,40 +1027,40 @@ void oesenc_pi::OnShowFPRClick( wxCommandEvent &event )
 
 void oesenc_pi::OnNewFPRClick( wxCommandEvent &event )
 {
-    
+
     wxString msg = _("To obtain a User Key, you must generate a unique System Identifier File.\n");
     msg += _("This file is also known as a\"fingerprint\" file.\n");
     msg += _("The fingerprint file contains information to uniquely identifiy this computer.\n\n");
     msg += _("After creating this file, you will need it to obtain your User Key at the o-charts.org shop.\n\n");
     msg += _("Proceed to create Fingerprint file?");
-    
+
     int ret = OCPNMessageBox_PlugIn(NULL, msg, _("oeSENC_PI Message"), wxYES_NO);
-    
+
     if(ret == wxID_YES){
-#if 0        
+#if 0
         wxString fpr_file;
         wxString fpr_dir = *GetpPrivateApplicationDataLocation(); //GetWritableDocumentsDir();
         #ifdef __WXMSW__
-        
+
         //  On XP, we simply use the root directory, since any other directory may be hidden
         int major, minor;
         ::wxGetOsVersion( &major, &minor );
         if( (major == 5) && (minor == 1) )
             fpr_dir = _T("C:\\");
-        #endif        
-            
+        #endif
+
             wxString cmd;
             cmd += _T(" -w ");                  // validate cell permit
-            
+
             cmd += _T(" -o ");
             cmd += fpr_dir;
-            
+
             ::wxBeginBusyCursor();
-            
+
             wxArrayString valup_result = exec_SENCutil_sync( cmd, false);
-            
+
             ::wxEndBusyCursor();
-            
+
             bool berr = false;
             for(unsigned int i=0 ; i < valup_result.GetCount() ; i++){
                 wxString line = valup_result[i];
@@ -1071,14 +1071,14 @@ void oesenc_pi::OnNewFPRClick( wxCommandEvent &event )
                 if(line.Upper().Find(_T("FPR")) != wxNOT_FOUND){
                     fpr_file = line.AfterFirst(':');
                 }
-                
+
             }
-            
-            
+
+
             if(!berr && fpr_file.Length()){
                 wxString msg1 = _T("Fingerprint file created.\n");
                 msg1 += fpr_file;
-                
+
                 OCPNMessageBox_PlugIn(NULL, msg1, _T("S63_PI Message"), wxOK);
             }
             else{
@@ -1089,11 +1089,11 @@ void oesenc_pi::OnNewFPRClick( wxCommandEvent &event )
                 }
                 OCPNMessageBox_PlugIn(NULL, _T("ERROR Creating Fingerprint file\n Check OpenCPN log file."), _T("S63_PI Message"), wxOK);
             }
-            
+
             g_fpr_file = fpr_file;
-            
+
             m_parent->Set_FPR();
-#endif            
+#endif
     }
 }
 
@@ -1216,9 +1216,9 @@ bool oesenc_pi::ScrubChartinfoList( void )
     //  Get the list of directories that the chart database recognises.
     wxArrayString chartArray;
     wxFileConfig *pConf = (wxFileConfig *) g_pconfig;
-    
+
     if(g_debugLevel) wxLogMessage(_T("Scrub1: "));
-    
+
     pConf->SetPath( _T ( "/ChartDirectories" ) );
     int iDirMax = pConf->GetNumberOfEntries();
     if( iDirMax ) {
@@ -1227,63 +1227,63 @@ bool oesenc_pi::ScrubChartinfoList( void )
         bool bCont = pConf->GetFirstEntry( str, dummy );
         while( bCont ) {
             pConf->Read( str, &val );              // Get a Directory name
-            
+
             // remove/fix the decorations
             wxString valAdd = val.BeforeFirst('^') + wxString(wxFileName::GetPathSeparator());
 
             if(g_debugLevel) wxLogMessage(_T("  Dirlist  val: ") + val + _T("  valadd: ") + valAdd);
-            
+
             chartArray.Add(valAdd);
             bCont = pConf->GetNextEntry( str, dummy );
         }
     }
-    
+
     // And walk the hashmap of ChartinfoItems, trying to find a match from the hashmap item to the directory list contents
 
     if(g_debugLevel) wxLogMessage(_T("Scrub2: "));
-    
+
     pConf->SetPath ( _T ( "/PlugIns/oesenc/ChartinfoList" ) );
     std::map<std::string, ChartInfoItem *>::iterator iter = info_hash.begin();
     while( iter != info_hash.end())
     {
         std::string key = iter->first;
         wxString strk = wxString(key.c_str(), wxConvUTF8);
-        
+
         //  Turn the key back into a directory path by removing/fixing the decorations
-        
+
         wxString strt = strk.Mid(2);
         strt.Replace('!', wxFileName::GetPathSeparator());
-        
+
         if(g_debugLevel) wxLogMessage(_T("strk: ") + strk);
         if(g_debugLevel) wxLogMessage(_T("strt: ") + strt);
-        
+
         bool bfound = false;
-        
+
         //  Of course, the candidate directory must exist...
         if(::wxDirExists(strt)){
-            
+
             for(unsigned int i=0 ; i < chartArray.GetCount() ; i++){
                 wxString ts = chartArray.Item(i);
                 wxFileName target(ts);
                 wxString tara = target.GetPath();
                 if(g_debugLevel) wxLogMessage(_T("ChartDir entry considered: ") + tara);
-                
+
                 bool done = false;
                 wxString cana;
                 wxFileName candidate = wxFileName(strt);
-                
+
                 while(!done){
                     cana = candidate.GetPath();
                     if(g_debugLevel) wxLogMessage(_T("  Chartinfo candidate tested: ") + cana);
-                    
+
                     if(target.GetPath() == candidate.GetPath()){
                         if(g_debugLevel) wxLogMessage(_T("done1"));
                         done = true;
                     }
-                    
+
                     if(candidate.GetFullPath() == target.GetFullPath()){
                         if(g_debugLevel) wxLogMessage(_T("done2"));
-                        
+
                         done = true;
                         bfound = true;
                         break;
@@ -1301,8 +1301,8 @@ bool oesenc_pi::ScrubChartinfoList( void )
         else{
             if(g_debugLevel) wxLogMessage(_T("  Candidate does not exist: ") + strt);
         }
-            
-        
+
+
         //  Did not find the directory, so remove corresponding entry from the hashmap.
         //  This means that the entry will not be written to config file on app exit, so it is gone.
         if(!bfound){
@@ -1314,23 +1314,23 @@ bool oesenc_pi::ScrubChartinfoList( void )
             ++iter;
             if(g_debugLevel) wxLogMessage(_T("    keeping: ") + strk + _T("\n"));
         }
-        
+
     }
     return true;
 }
-    
+
 
 bool oesenc_pi::LoadConfig( void )
 {
     wxFileConfig *pConf = (wxFileConfig *) g_pconfig;
 
     if( pConf ) {
-        pConf->SetPath( _T ( "/Settings" ) );    
-        
+        pConf->SetPath( _T ( "/Settings" ) );
+
         pConf->Read( _T ( "ZoomDetailFactorVector" ), &g_chart_zoom_modifier_vector, 0 );
         g_chart_zoom_modifier_vector = wxMin(g_chart_zoom_modifier_vector,5);
         g_chart_zoom_modifier_vector = wxMax(g_chart_zoom_modifier_vector,-5);
-        
+
 
         pConf->SetPath( _T("/PlugIns/oesenc") );
 
@@ -1353,15 +1353,15 @@ bool oesenc_pi::LoadConfig( void )
         pConf->Read( _T("loginKey"), &g_loginKey);
         pConf->Read( _T("ADMIN"), &g_admin);
         pConf->Read( _T("DEBUG_SHOP"), &g_debugShop);
-        
+
         if( !wxFileExists(g_fpr_file) )
             g_fpr_file = wxEmptyString;
-        
+
         pConf->Read( _T("UserKey"), &g_UserKey );
 
         //  Load the persistent Chartinfo strings
         pConf->SetPath ( _T ( "/PlugIns/oesenc/ChartinfoList" ) );
-        
+
         wxString strk;
         wxString kval;
         long dummyval;
@@ -1377,44 +1377,44 @@ bool oesenc_pi::LoadConfig( void )
                 info_hash[key] = pitem;
                 if(g_debugLevel) wxLogMessage(_T("Loadconfig adding: ") + strk);
                 wxLogMessage(_T("Loadconfig adding info string: ") + kval);
-                
+
             }
-                
+
             bContk = pConf->GetNextEntry( strk, dummyval );
         }
 
         //  Load the persistent EULA information
         pConf->SetPath ( _T ( "/PlugIns/oesenc/EULA" ) );
-        
+
         bContk = pConf->GetFirstEntry( strk, dummyval );
         while( bContk ) {
             pConf->Read( strk, &kval );
-            
+
             ChartSetEULA *cse = new ChartSetEULA;
             wxStringTokenizer tkz( kval, _T(";") );
             wxString EULAShow = tkz.GetNextToken();        // oesencEULAShow, text
             wxString EULAShown = tkz.GetNextToken();        // Has it been shown at least once?  1/0
             wxString EULAFile = tkz.GetNextToken();
-            
+
             cse->fileName = EULAFile;
-            
+
             if(EULAShow.Upper().Find(_T("ONCE")) != wxNOT_FOUND)
                 cse->npolicyShow = 1;
             else if(EULAShow.Upper().Find(_T("ALWAYS")) != wxNOT_FOUND)
                 cse->npolicyShow = 2;
-            else 
+            else
                 cse->npolicyShow = 0;
-            
+
             if(EULAShown ==_T("1"))
                 cse->b_onceShown = true;
-            
+
             g_EULAArray.Add(cse);
-            
-            
+
+
             bContk = pConf->GetNextEntry( strk, dummyval );
         }
-        
-        
+
+
     }
 
     return true;
@@ -1430,12 +1430,12 @@ bool oesenc_pi::SaveConfig( void )
         pConf->Write( _T("UserKey"), g_UserKey );
         pConf->Write( _T("LastFPRFile"), g_fpr_file);
 
-#ifdef __OCPN__ANDROID__        
+#ifdef __OCPN__ANDROID__
         pConf->Write( _T("systemName"), g_systemName);
         pConf->Write( _T("loginUser"), g_loginUser);
         pConf->Write( _T("loginKey"), g_loginKey);
-#endif        
-        
+#endif
+
         //  Save the persistent Chartinfo strings
         pConf->DeleteGroup(_T ( "/PlugIns/oesenc/ChartinfoList"));
         pConf->SetPath ( _T ( "/PlugIns/oesenc/ChartinfoList" ) );
@@ -1446,37 +1446,37 @@ bool oesenc_pi::SaveConfig( void )
             std::string key = iter->first;
             wxString strk = wxString(key.c_str(), wxConvUTF8);
             pConf->Write( strk, pci->config_string );
-            
+
         }
 
         //  Save the persistent EULA
         pConf->DeleteGroup(_T ( "/PlugIns/oesenc/EULA"));
         pConf->SetPath ( _T ( "/PlugIns/oesenc/EULA" ) );
-        
+
         for(unsigned int i=0 ; i < g_EULAArray.GetCount() ; i++){
             ChartSetEULA *cse = g_EULAArray.Item(i);
-            
+
             wxString config_val;
             wxString EULAShow = _T("never");
             if(cse->npolicyShow == 1)
                 EULAShow = _T("once");
             if(cse->npolicyShow == 2)
                 EULAShow = _T("always");
-            
+
             config_val += EULAShow + _T(";");
             if(cse->b_onceShown)
                 config_val += _T("1;");
             else
                 config_val += _T("0;");
-            
+
             config_val += cse->fileName;
-            
+
             wxString key;
             key.Printf(_T("EULA_%02d"), i);
 
             pConf->Write( key, config_val );
         }
-        
+
     }
 
     return true;
@@ -1500,14 +1500,14 @@ void oesenc_pi::ShowPreferencesDialog( wxWindow* parent )
     //wxColour cl;
     //GetGlobalColor(_T("DILG1"), &cl);
 //    g_prefs_dialog->SetBackgroundColour(cl);
-    
-    
+
+
     g_prefs_dialog->Show();
-        
+
     if(g_prefs_dialog->ShowModal() == wxID_OK)
     {
         SaveConfig();
-        
+
     }
     delete g_prefs_dialog;
     g_prefs_dialog = NULL;
@@ -1516,25 +1516,25 @@ void oesenc_pi::ShowPreferencesDialog( wxWindow* parent )
 void oesenc_pi::ProcessChartManageResult( wxString result )
 {
     if(g_prefs_dialog)
-       g_prefs_dialog->EndModal(0); 
+       g_prefs_dialog->EndModal(0);
 
-#ifdef __OCPN__ANDROID__    
+#ifdef __OCPN__ANDROID__
     qDebug() << "ProcessChartManageResult: " << result.mb_str();
     bool b_forceUpdate = false;
-   
+
     wxStringTokenizer st(result, _T(";"), wxTOKEN_DEFAULT);
     while( st.HasMoreTokens() )
     {
         wxString token = st.GetNextToken();
         if(token.StartsWith(_T("InstallDir"))){
             wxString dir = token.AfterFirst(':');
-            
+
             // Strip any trailing '/'
             wxString rest;
             if(dir.EndsWith("/", &rest)){
                 dir = rest;
             }
-            
+
             bool covered = false;
             for( size_t i = 0; i < GetChartDBDirArrayString().GetCount(); i++ ){
                 if( dir.StartsWith((GetChartDBDirArrayString().Item(i))) ) {
@@ -1547,26 +1547,26 @@ void oesenc_pi::ProcessChartManageResult( wxString result )
                 wxLogMessage(_T("osenc_pi adding chart directory: ") + dir);
                 qDebug() << "adding dir: " << dir.mb_str();
             }
-            
+
             b_forceUpdate = true;
         }
-        
+
         else if(token.StartsWith(_T("UserName"))){
             g_loginUser = token.AfterFirst(':');
             qDebug() << "g_loginUser: " << g_loginUser.mb_str();
         }
-        
+
         else if(token.StartsWith(_T("LoginKey"))){
             g_loginKey = token.AfterFirst(':');
             qDebug() << "g_loginKey: " << g_loginKey.mb_str();
         }
-        
+
         else if(token.StartsWith(_T("SystemName"))){
             g_systemName = token.AfterFirst(':');
             qDebug() << "g_systemName: " << g_systemName.mb_str();
         }
     }
-    
+
     // This is a bit harsh, but always works...
     if(b_forceUpdate)
         ForceChartDBUpdate();
@@ -2222,7 +2222,7 @@ IMPLEMENT_DYNAMIC_CLASS( SENCGetUserKeyDialog, wxDialog )
 
      wxFont *qFont = GetOCPNScaledFont_PlugIn(_("Dialog"));
      SetFont( *qFont );
-     
+
      CreateControls(legendID);
      GetSizer()->SetSizeHints( this );
      Centre();
@@ -2248,10 +2248,10 @@ IMPLEMENT_DYNAMIC_CLASS( SENCGetUserKeyDialog, wxDialog )
      wstyle |= wxSTAY_ON_TOP;
 #endif
      wxDialog::Create( parent, id, caption, pos, size, wstyle );
-     
+
      wxFont *qFont = GetOCPNScaledFont_PlugIn(_("Dialog"));
      SetFont( *qFont );
-     
+
      SetTitle( _("OpenCPN oeSENC UserKey Required"));
 
      CreateControls( legendID );
@@ -2286,7 +2286,7 @@ IMPLEMENT_DYNAMIC_CLASS( SENCGetUserKeyDialog, wxDialog )
      switch(legendID){
          case LEGEND_NONE:
              break;
-             
+
          case LEGEND_FIRST:
              itemStaticTextLegend = new wxStaticText( itemDialog1, wxID_STATIC,
 _("A valid oeSENC UserKey has the alphanumeric format:  AAAA-BBBB-CCCC-DDDD-EEEE-FF\n\n\
@@ -2308,10 +2308,10 @@ oeSENC charts will be disabled for this session.\n\
 Please verify your UserKey and restart OpenCPN.\n\n\
 Your oeSENC UserKey may be obtained from your chart provider.\n\n"),
                                                     wxDefaultPosition, wxDefaultSize, 0);
-             
+
              m_UserKeyCtl->Disable();
              break;
-             
+
          case LEGEND_FOURTH:
              itemStaticTextLegend = new wxStaticText( itemDialog1, wxID_STATIC,
                                                       _("UserKey accepted.\n\n"),
@@ -2321,13 +2321,13 @@ Your oeSENC UserKey may be obtained from your chart provider.\n\n"),
          default:
              break;
      }
-                                       
+
      if(itemStaticTextLegend){
          itemBoxSizer2->Add( itemStaticTextLegend, 0, wxALIGN_LEFT | wxLEFT | wxRIGHT | wxTOP, 5 );
      }
-         
-                                       
-#if 0     
+
+
+#if 0
      wxBoxSizer* itemBoxSizerTest = new wxBoxSizer( wxVERTICAL );
      itemBoxSizer2->Add( itemBoxSizerTest, 0, wxALIGN_LEFT | wxALL | wxEXPAND, 5 );
 
@@ -2363,7 +2363,7 @@ Your oeSENC UserKey may be obtained from your chart provider.\n\n"),
      itemBoxSizer16->Add( m_OKButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5 );
 
      m_UserKeyCtl->AppendText(g_old_UserKey);
-     
+
  }
 
 
@@ -2398,22 +2398,22 @@ Your oeSENC UserKey may be obtained from your chart provider.\n\n"),
      {
          g_old_UserKey = g_UserKey;
          SENCGetUserKeyDialog dlg( legendID, GetOCPNCanvasWindow());
-         
+
          wxSize dialogSize(500, -1);
-         
+
 #ifdef __OCPN__ANDROID__
          wxSize ss = ::wxGetDisplaySize();
          dialogSize.x = ss.x * 8 / 10;
-#endif         
+#endif
          dlg.SetSize(dialogSize);
          dlg.Centre();
-         
+
          if(pinfoDlg)
              pinfoDlg->Hide();
 
 #ifdef __OCPN__ANDROID__
          androidHideBusyIcon();
-#endif             
+#endif
          int ret = dlg.ShowModal();
          if(ret == 0)
              return g_UserKey;
@@ -2421,13 +2421,13 @@ Your oeSENC UserKey may be obtained from your chart provider.\n\n"),
              return _T("Invalid");
      }
  }
- 
+
 void ShowGenericErrorMessage()
 {
     if(g_GenericMessageShown)
         return;
-        
-    wxString msg = 
+
+    wxString msg =
 _("This chart cannot be loaded due to any of the following reasons:\n\n\
 - You have made important hardware changes on your computer.\n\
 - Your OS has been updated and your license has been suspended.\n\
@@ -2437,26 +2437,26 @@ _("This chart cannot be loaded due to any of the following reasons:\n\n\
 Please contact info@o-charts.org if the problem persists.\n");
 
     OCPNMessageBox_PlugIn(NULL, msg, _("oeSENC_pi Message"),  wxOK, -1, -1);
-    
+
     g_GenericMessageShown = true;
 }
 
- 
+
 bool validateUserKey( wxString sencFileName)
 {
     if(g_debugLevel)printf("\n-----------validateUserKey\n");
-    
+
     wxLogMessage(_T("validateUserKey"));
-    
+
     if(g_bDeclaredInvalid)
         return false;
-    
+
     bool b_Set = true;
     if((g_UserKey.Length() == 0) || (g_UserKey == _T("Invalid"))){
         b_Set = false;
         g_UserKey = GetUserKey( LEGEND_FIRST, true );
     }
-        
+
     // Try to read the header of the supplied oeSENC file name
     Osenc senc;
     senc.setKey(g_UserKey);
@@ -2466,64 +2466,64 @@ bool validateUserKey( wxString sencFileName)
     if(retCode != SENC_NO_ERROR){
        //wxASSERT( 0 );
        wxLogMessage(_T("validateUserKey E1"));
-        
-    
+
+
         if(( ERROR_SIGNATURE_FAILURE == retCode )  || ( ERROR_SENC_CORRUPT == retCode ) ){
             wxLogMessage(_T("validateUserKey E1.5"));
-            
+
             // We try once, quietly
             int retCode_retry0 = senc.ingestHeader( sencFileName );
             if(retCode_retry0 == SENC_NO_ERROR){
                 wxLogMessage(_T("OK after quiet retry."));
                 return true;
             }
-                
+
             wxLogMessage(_T("validateUserKey E2, reset server"));
-            
+
             validate_SENC_server();             // reset the server
- 
+
             int retCode_retry1 = senc.ingestHeader( sencFileName );
             if(retCode_retry1 == SENC_NO_ERROR){
                 wxLogMessage(_T("OK after server reset."));
                 return true;
             }
-            
+
             wxLogMessage(_T("validateUserKey E2.5, extracting userKey from Chartinfo.txt"));
 
             //  On a hard signature error, we try to extract a userKey from the chartinfo file, if present
-            
+
                // get the Chartinfo as a wxTextFile
             wxFileName fn(sencFileName);
             wxString infoFile = fn.GetPath(  wxPATH_GET_VOLUME + wxPATH_GET_SEPARATOR );
             infoFile += _T("Chartinfo.txt");
             wxString new_userKey;
-            
+
             if(wxFileExists(infoFile)){
                 wxTextFile info_file( infoFile );
                 if( info_file.Open() ){
                     wxString line = info_file.GetFirstLine();
-        
+
                     while( !info_file.Eof() ){
                         if(line.StartsWith( _T("UserKey:" ) ) ) {
                             wxString content = line.AfterFirst(':').Trim().Trim(false);
                             new_userKey = content;
-                                                 
+
                             break;
                         }
-            
+
                         line = info_file.GetNextLine();
                     }
                 }
             }
-            
+
             if(new_userKey.Len() && (!new_userKey.IsSameAs(g_UserKey))){
                 wxLogMessage(_T("Switching userKey to: ") + new_userKey);
                 g_UserKey = new_userKey;
             }
-                
-            
+
+
             validate_SENC_server();             // reset the server
- 
+
             senc.setKey(g_UserKey);             // key from the chartinfo file
             int retCode_retry21 = senc.ingestHeader( sencFileName );
             if(retCode_retry21 == SENC_NO_ERROR){
@@ -2535,20 +2535,20 @@ bool validateUserKey( wxString sencFileName)
 
             ShowGenericErrorMessage();
             return false;
-#if 0            
+#if 0
 
             //  No other choice here but to ask the user to enter a new key
             wxString key = GetUserKey( LEGEND_SECOND, true );
-            
+
             if(key.Upper() == _T("INVALID")){
                 GetUserKey( LEGEND_THIRD, true );                  // Bail out on cancel
                 g_bDeclaredInvalid = true;
                 return false;
             }
-            
+
             senc.setKey(key);
             int retCode_retry = senc.ingestHeader( sencFileName );
-            
+
             if(retCode_retry != SENC_NO_ERROR){
                 GetUserKey( LEGEND_THIRD, true );                  // Bail out
                 g_bDeclaredInvalid = true;
@@ -2556,7 +2556,7 @@ bool validateUserKey( wxString sencFileName)
             }
             else{
                 wxLogMessage(_T("validateUserKey E3"));
-                
+
                 if(!b_Set)
                     GetUserKey( LEGEND_FOURTH, true );                  // Inform the user
                 g_UserKey = key;
@@ -2566,7 +2566,7 @@ bool validateUserKey( wxString sencFileName)
     }
     else{
         wxLogMessage(_T("validateUserKey E4"));
-        
+
 //         if(!b_Set)
 //             GetUserKey( LEGEND_FOURTH, true );                  // Inform the user
     }
@@ -2579,97 +2579,97 @@ void LoadS57Config()
 {
     if( !ps52plib )
         return;
-    
+
     int read_int;
     double dval;
-    
+
     g_pconfig->SetPath( _T ( "/Settings" ) );
     g_pconfig->Read( _T ( "DebugS57" ), &g_PIbDebugS57, 0 );         // Show LUP and Feature info in object query
-    
+
     g_pconfig->SetPath( _T ( "/Settings/GlobalState" ) );
-    
+
     g_pconfig->Read( _T ( "bShowS57Text" ), &read_int, 0 );
     ps52plib->SetShowS57Text( !( read_int == 0 ) );
-    
+
     g_pconfig->Read( _T ( "bShowS57ImportantTextOnly" ), &read_int, 0 );
     ps52plib->SetShowS57ImportantTextOnly( !( read_int == 0 ) );
-    
+
     g_pconfig->Read( _T ( "bShowLightDescription" ), &read_int, 0 );
     ps52plib->SetShowLdisText( !( read_int == 0 ) );
-    
+
     g_pconfig->Read( _T ( "bExtendLightSectors" ), &read_int, 0 );
     ps52plib->SetExtendLightSectors( !( read_int == 0 ) );
-    
+
     g_pconfig->Read( _T ( "nDisplayCategory" ), &read_int, (enum _DisCat) STANDARD );
     ps52plib->SetDisplayCategory((enum _DisCat) read_int );
-    
+
     g_pconfig->Read( _T ( "nSymbolStyle" ), &read_int, (enum _LUPname) PAPER_CHART );
     ps52plib->m_nSymbolStyle = (LUPname) read_int;
-    
+
     g_pconfig->Read( _T ( "nBoundaryStyle" ), &read_int, PLAIN_BOUNDARIES );
     ps52plib->m_nBoundaryStyle = (LUPname) read_int;
-    
+
     g_pconfig->Read( _T ( "bShowSoundg" ), &read_int, 1 );
     ps52plib->m_bShowSoundg = !( read_int == 0 );
-    
+
     g_pconfig->Read( _T ( "bShowMeta" ), &read_int, 0 );
     ps52plib->m_bShowMeta = !( read_int == 0 );
-    
+
     g_pconfig->Read( _T ( "bUseSCAMIN" ), &read_int, 1 );
     ps52plib->m_bUseSCAMIN = !( read_int == 0 );
-    
+
     g_pconfig->Read( _T ( "bShowAtonText" ), &read_int, 1 );
     ps52plib->m_bShowAtonText = !( read_int == 0 );
-    
+
     g_pconfig->Read( _T ( "bDeClutterText" ), &read_int, 0 );
     ps52plib->m_bDeClutterText = !( read_int == 0 );
-    
+
     g_pconfig->Read( _T ( "bShowNationalText" ), &read_int, 0 );
     ps52plib->m_bShowNationalTexts = !( read_int == 0 );
-    
+
     if( g_pconfig->Read( _T ( "S52_MAR_SAFETY_CONTOUR" ), &dval, 5.0 ) ) {
         S52_setMarinerParam( S52_MAR_SAFETY_CONTOUR, dval );
         S52_setMarinerParam( S52_MAR_SAFETY_DEPTH, dval ); // Set safety_contour and safety_depth the same
     }
-    
+
     if( g_pconfig->Read( _T ( "S52_MAR_SHALLOW_CONTOUR" ), &dval, 3.0 ) ) S52_setMarinerParam(
         S52_MAR_SHALLOW_CONTOUR, dval );
-    
+
     if( g_pconfig->Read( _T ( "S52_MAR_DEEP_CONTOUR" ), &dval, 10.0 ) ) S52_setMarinerParam(
         S52_MAR_DEEP_CONTOUR, dval );
-    
+
     if( g_pconfig->Read( _T ( "S52_MAR_TWO_SHADES" ), &dval, 0.0 ) ) S52_setMarinerParam(
         S52_MAR_TWO_SHADES, dval );
-    
+
     ps52plib->UpdateMarinerParams();
-    
+
     g_pconfig->SetPath( _T ( "/Settings/GlobalState" ) );
     g_pconfig->Read( _T ( "S52_DEPTH_UNIT_SHOW" ), &read_int, 1 );   // default is metres
     read_int = wxMax(read_int, 0);                      // qualify value
     read_int = wxMin(read_int, 2);
     ps52plib->m_nDepthUnitDisplay = read_int;
-    
+
     //    S57 Object Class Visibility
-    
+
     OBJLElement *pOLE;
-    
+
     g_pconfig->SetPath( _T ( "/Settings/ObjectFilter" ) );
-    
+
     int iOBJMax = g_pconfig->GetNumberOfEntries();
     if( iOBJMax ) {
-        
+
         wxString str;
         long val;
         long dummy;
-        
+
         wxString sObj;
-        
+
         bool bCont = g_pconfig->GetFirstEntry( str, dummy );
         while( bCont ) {
             g_pconfig->Read( str, &val );              // Get an Object Viz
-            
+
             bool bNeedNew = true;
-            
+
             if( str.StartsWith( _T ( "viz" ), &sObj ) ) {
                 for( unsigned int iPtr = 0; iPtr < ps52plib->pOBJLArray->GetCount(); iPtr++ ) {
                     pOLE = (OBJLElement *) ( ps52plib->pOBJLArray->Item( iPtr ) );
@@ -2679,12 +2679,12 @@ void LoadS57Config()
                         break;
                     }
                 }
-                
+
                 if( bNeedNew ) {
                     pOLE = (OBJLElement *) calloc( sizeof(OBJLElement), 1 );
                     strncpy( pOLE->OBJLName, sObj.mb_str(), 6 );
                     pOLE->nViz = 1;
-                    
+
                     ps52plib->pOBJLArray->Add( (void *) pOLE );
                 }
             }
@@ -2695,7 +2695,7 @@ void LoadS57Config()
 
 
 
-       
+
 static GLboolean QueryExtension( const char *extName )
 {
     /*
@@ -2707,16 +2707,16 @@ static GLboolean QueryExtension( const char *extName )
     char *p;
     char *end;
     int extNameLen;
-    
+
     extNameLen = strlen( extName );
-    
+
     p = (char *) glGetString( GL_EXTENSIONS );
     if( NULL == p ) {
         return GL_FALSE;
     }
-    
+
     end = p + strlen( p );
-    
+
     while( p < end ) {
         int n = strcspn( p, " " );
         if( ( extNameLen == n ) && ( strncmp( extName, p, n ) == 0 ) ) {
@@ -2746,30 +2746,30 @@ GenericFunction ocpnGetProcAddress(const char *addr, const char *extension)
     char addrbuf[256];
     if(!extension)
         return (GenericFunction)NULL;
-    
-#ifndef __OCPN__ANDROID__    
+
+#ifndef __OCPN__ANDROID__
         //  If this is an extension entry point,
         //  We look explicitly in the extensions list to confirm
         //  that the request is actually supported.
-        // This may be redundant, but is conservative, and only happens once per session.    
+        // This may be redundant, but is conservative, and only happens once per session.
         if(extension && strlen(extension)){
             wxString s_extension(&addr[2], wxConvUTF8);
             wxString s_family;
             s_family = wxString(extension, wxConvUTF8);
             s_extension.Prepend(_T("_"));
             s_extension.Prepend(s_family);
-            
+
             s_extension.Prepend(_T("GL_"));
-            
+
             if(!QueryExtension( s_extension.mb_str() )){
                 return (GenericFunction)NULL;
             }
         }
-#endif    
-        
+#endif
+
         snprintf(addrbuf, sizeof addrbuf, "%s%s", addr, extension);
         return (GenericFunction)systemGetProcAddress(addrbuf);
-        
+
 }
 
 bool  b_glEntryPointsSet;
@@ -2777,26 +2777,26 @@ bool  b_glEntryPointsSet;
 static void GetglEntryPoints( void )
 {
     b_glEntryPointsSet = true;
-    
+
     // the following are all part of framebuffer object,
     // according to opengl spec, we cannot mix EXT and ARB extensions
     // (I don't know that it could ever happen, but if it did, bad things would happen)
-    
+
 #ifndef __OCPN__ANDROID__
     const char *extensions[] = {"", "ARB", "EXT", 0 };
 #else
     const char *extensions[] = {"", "OES", 0 };
 #endif
-    
+
     unsigned int n_ext = (sizeof extensions) / (sizeof *extensions);
-    
+
     unsigned int i;
     for(i=0; i<n_ext; i++) {
         if((s_glGenBuffers = (PFNGLGENBUFFERSPROC)
             ocpnGetProcAddress( "glGenBuffers", extensions[i])))
             break;
     }
-    
+
     if(i<n_ext){
 #if 0
         s_glGenRenderbuffers = (PFNGLGENRENDERBUFFERSEXTPROC)
@@ -2819,7 +2819,7 @@ static void GetglEntryPoints( void )
         ocpnGetProcAddress( "glDeleteRenderbuffers", extensions[i]);
         s_glGenerateMipmap = (PFNGLGENERATEMIPMAPEXTPROC)
         ocpnGetProcAddress( "glGenerateMipmap", extensions[i]);
-#endif        
+#endif
         //VBO
         s_glGenBuffers = (PFNGLGENBUFFERSPROC)
         ocpnGetProcAddress( "glGenBuffers", extensions[i]);
@@ -2829,44 +2829,44 @@ static void GetglEntryPoints( void )
         ocpnGetProcAddress( "glBufferData", extensions[i]);
         s_glDeleteBuffers = (PFNGLDELETEBUFFERSPROC)
         ocpnGetProcAddress( "glDeleteBuffers", extensions[i]);
-        
+
 //         s_glGetBufferParameteriv = (PFNGLGETBUFFERPARAMETERIV)
 //         ocpnGetProcAddress( "glGetBufferParameteriv", extensions[i]);
-        
+
     }
-    
+
     //  Retry VBO entry points with all extensions
     if(0 == s_glGenBuffers){
         for( i=0; i<n_ext; i++) {
             if((s_glGenBuffers = (PFNGLGENBUFFERSPROC)ocpnGetProcAddress( "glGenBuffers", extensions[i])) )
                 break;
         }
-        
+
         if( i < n_ext ){
             s_glBindBuffer = (PFNGLBINDBUFFERPROC) ocpnGetProcAddress( "glBindBuffer", extensions[i]);
             s_glBufferData = (PFNGLBUFFERDATAPROC) ocpnGetProcAddress( "glBufferData", extensions[i]);
             s_glDeleteBuffers = (PFNGLDELETEBUFFERSPROC) ocpnGetProcAddress( "glDeleteBuffers", extensions[i]);
         }
     }
-    
- 
-#if 0 
-#ifndef __OCPN__ANDROID__            
+
+
+#if 0
+#ifndef __OCPN__ANDROID__
     for(i=0; i<n_ext; i++) {
         if((s_glCompressedTexImage2D = (PFNGLCOMPRESSEDTEXIMAGE2DPROC)
             ocpnGetProcAddress( "glCompressedTexImage2D", extensions[i])))
             break;
     }
-    
+
     if(i<n_ext){
         s_glGetCompressedTexImage = (PFNGLGETCOMPRESSEDTEXIMAGEPROC)
         ocpnGetProcAddress( "glGetCompressedTexImage", extensions[i]);
     }
-#else    
+#else
     s_glCompressedTexImage2D =          glCompressedTexImage2D;
 #endif
 #endif
-    
+
 }
 
 void init_S52Library(void)
@@ -2875,37 +2875,37 @@ void init_S52Library(void)
     g_overzoom_emphasis_base = 0;
     g_oz_vector_scale = false;
     g_ChartScaleFactorExp = GetOCPNChartScaleFactor_Plugin();
-    
+
     //  Class Registrar Manager
-    
+
     if( pi_poRegistrarMgr == NULL ) {
         wxString csv_dir = *GetpSharedDataLocation();
         csv_dir += _T("s57data");
-        
+
         pi_poRegistrarMgr = new s57RegistrarMgr( csv_dir, NULL );
     }
 
     g_csv_locn = *GetpSharedDataLocation();
     g_csv_locn += _T("s57data");
-    
+
     //  S52 Plib
     if(ps52plib) // already loaded?
         return;
 
     wxString plib_data = *GetpSharedDataLocation();
     plib_data += _T("s57data/"); //TODO use sep
-    
+
     ps52plib = new s52plib( plib_data, false );
 
 
     if( ps52plib->m_bOK ) {
-        
+
         // Load up any S52 PLIB patch files found
         wxString dataLocn =*GetpSharedDataLocation() +
         _T("plugins") + wxFileName::GetPathSeparator() +
         _T("oesenc_pi") + wxFileName::GetPathSeparator() +
         _T("data");
-        
+
         wxArrayString patchFiles;
         wxDir::GetAllFiles(dataLocn, &patchFiles, _T("*.xml"));
         for(unsigned int i=0 ; i < patchFiles.GetCount() ; i++){
@@ -2924,24 +2924,24 @@ void init_S52Library(void)
 
         LoadS57Config();
         ps52plib->m_myConfig = PI_GetPLIBStateHash();
-        
+
         ps52plib->SetPLIBColorScheme( GLOBAL_COLOR_SCHEME_RGB );
-        
+
         wxWindow *cc1 = GetOCPNCanvasWindow();
         if(cc1){
-            
+
             if(!g_display_size_mm)
                 g_display_size_mm = wxGetDisplaySizeMM().GetWidth();
-            
+
             int display_size_mm = wxMax(g_display_size_mm, 200);
-            
+
             int sx, sy;
             wxDisplaySize( &sx, &sy );
             double max_physical = wxMax(sx, sy);
-            
+
             double pix_per_mm = ( max_physical ) / ( (double) display_size_mm );
             ps52plib->SetPPMM( pix_per_mm );
-            
+
         }
     } else {
         wxLogMessage( _T("   S52PLIB Initialization failed, oesenc_pi disabling Vector charts.") );
@@ -2953,17 +2953,17 @@ void init_S52Library(void)
 
 void init_GLLibrary(void)
 {
-   
+
     // OpenGL variables
-    
+
     if(g_GLOptionsSet && !g_GLSetupOK){
         char *p = (char *) glGetString( GL_EXTENSIONS );
         if( NULL == p )
             pi_bopengl = false;
         else
             pi_bopengl = true;
-        
-    
+
+
         char *str = (char *) glGetString( GL_RENDERER );
         if (str == NULL)
             wxLogMessage(_T("oeSENC_pi failed to initialize OpenGL"));
@@ -2976,13 +2976,13 @@ void init_GLLibrary(void)
             strncpy( render_string, str, 79 );
             renderer = wxString( render_string, wxConvUTF8 );
         }
-        
+
         g_GLMinCartographicLineWidth = 1.0;
         g_GLMinSymbolLineWidth = 1.0;
-        
+
         //  Set the minimum line width
         glGetError();       // Clear errors
-            
+
         GLint parms[2];
         glGetIntegerv( GL_SMOOTH_LINE_WIDTH_RANGE, &parms[0] );
         if(glGetError())
@@ -2991,23 +2991,23 @@ void init_GLLibrary(void)
             g_GLMinSymbolLineWidth = wxMax(parms[0], 1);
             g_GLMinCartographicLineWidth = wxMax(parms[0], 1);
         }
-        
+
         wxString lwmsg;
         lwmsg.Printf(_T("oeSENC_PI:  OpenGL-> Minimum cartographic line width: %4.1f"), g_GLMinCartographicLineWidth);
         wxLogMessage(lwmsg);
-        
+
         //    Some GL renderers do a poor job of Anti-aliasing very narrow line widths.
         //    This is most evident on rendered symbols which have horizontal or vertical line segments
         //    Detect this case, and adjust the render parameters.
-        
+
         if( renderer.Upper().Find( _T("MESA") ) != wxNOT_FOUND ){
             GLfloat parf;
             glGetFloatv(  GL_SMOOTH_LINE_WIDTH_GRANULARITY, &parf );
-            
+
             g_GLMinSymbolLineWidth = wxMax(((float)parms[0] + parf), 1);
         }
-        
-         
+
+
         //  Setup device dependent OpenGL options as communicated from core by JSON message
         ps52plib->SetGLOptions(g_b_useStencil, g_b_useStencilAP, g_b_useScissorTest, g_b_useFBO,  g_b_EnableVBO, g_oe_texture_rectangle_format);
 
@@ -3019,37 +3019,37 @@ void init_GLLibrary(void)
 
 bool testSENCServer()
 {
-#ifdef __OCPN__ANDROID__    
+#ifdef __OCPN__ANDROID__
     qDebug() << "Testing SENC server";
-    
+
     //  The target binary executable
     wxString cmd = g_sencutil_bin;
-    
+
     //  Set up the parameter passed as the local app storage directory
     wxString dataLoc = *GetpPrivateApplicationDataLocation();
     wxFileName fn(dataLoc);
     wxString dataDir = fn.GetPath(wxPATH_GET_SEPARATOR);
-        
+
     //  Set up the parameter passed to runtime environment as LD_LIBRARY_PATH
     // This will be {dir of g_sencutil_bin}/lib
     wxFileName fnl(cmd);
     wxString libDir = fnl.GetPath(wxPATH_GET_SEPARATOR) + _T("lib");
-        
+
     wxLogMessage(_T("oesenc_pi: Starting: ") + cmd );
-    
+
     wxString result = callActivityMethod_s4s("createProcSync", cmd, _T("-w"), dataDir, libDir);
-    
+
     wxLogMessage(_T("oesenc_pi: Start Result: ") + result);
-    
- 
-#endif    
+
+
+#endif
     return true;
 }
 
 bool validate_SENC_server(void)
 {
-      
-    
+
+
     if(g_debugLevel)printf("\n-------validate_SENC_server\n");
     wxLogMessage(_T("validate_SENC_server"));
 
@@ -3077,24 +3077,24 @@ bool validate_SENC_server(void)
             nLoop++;
         }
     }
-    
+
     // Not running, so start it up...
 
     wxString bin_test = g_sencutil_bin;
-    
-#ifndef __OCPN__ANDROID__    
+
+#ifndef __OCPN__ANDROID__
     //Verify that oeserverd actually exists, and runs.
-    
+
     if(wxNOT_FOUND != g_sencutil_bin.Find('\"'))
         bin_test = g_sencutil_bin.Mid(1).RemoveLast();
-    
+
     wxString msg = _("Checking oeserverd utility at ");
     msg += _T("{");
     msg += bin_test;
     msg += _T("}");
     wxLogMessage(_T("oesenc_pi: ") + msg);
-    
-    
+
+
     if(!::wxFileExists(bin_test)){
         wxString msg = _("Cannot find the oserverd utility at \n");
         msg += _T("{");
@@ -3102,7 +3102,7 @@ bool validate_SENC_server(void)
         msg += _T("}");
         OCPNMessageBox_PlugIn(NULL, msg, _("oeSENC_pi Message"),  wxOK, -1, -1);
         wxLogMessage(_T("oesenc_pi: ") + msg);
-        
+
         g_sencutil_bin.Clear();
         return false;
     }
@@ -3112,9 +3112,9 @@ bool validate_SENC_server(void)
 
 
     wxString pipeParm;
-    
+
     int flags = wxEXEC_ASYNC;
-#ifdef __WXMSW__    
+#ifdef __WXMSW__
     flags |= wxEXEC_HIDE_CONSOLE;
     long pid = ::wxGetProcessId();
     pipeParm.Printf(_T("OCPN%04d"), pid % 10000);
@@ -3123,50 +3123,50 @@ bool validate_SENC_server(void)
 
     if(g_pipeParm.Length())
         cmds += _T(" -p ") + g_pipeParm;
-    
+
     if(g_serverDebug)
         cmds += _T(" -d");
-    
+
     wxLogMessage(_T("oesenc_pi: starting oeserverd utility: ") + cmds);
     g_serverProc = wxExecute(cmds, flags);              // exec asynchronously
     wxMilliSleep(1000);
 
-    
+
 #else           // Android
     qDebug() << "Starting SENC server";
-    
+
     //  The target binary executable
     wxString cmd = g_sencutil_bin;
-    
+
     //  Set up the parameter passed as the local app storage directory
     wxString dataLoc = *GetpPrivateApplicationDataLocation();
     wxFileName fn(dataLoc);
     wxString dataDir = fn.GetPath(wxPATH_GET_SEPARATOR);
-        
+
     //  Set up the parameter passed to runtime environment as LD_LIBRARY_PATH
     // This will be {dir of g_sencutil_bin}/lib
     wxFileName fnl(cmd);
     wxString libDir = fnl.GetPath(wxPATH_GET_SEPARATOR) + _T("lib");
-    
+
     wxLogMessage(_T("oesenc_pi: Starting: ") + cmd );
-    
+
     wxString result = callActivityMethod_s4s("createProc", cmd, _T("-q"), dataDir, libDir);
-    
+
     wxLogMessage(_T("oesenc_pi: Start Result: ") + result);
-    
+
     long pid;
     if(result.ToLong(&pid))
         g_serverProc = pid;
-    
+
     wxMilliSleep(1000);
-    
-#endif    
-    
+
+#endif
+
     // Check to see if the server function is available
     if(g_serverProc){
         bool bAvail = false;
         int nLoop = 3;
-        
+
         while(nLoop){
             Osenc_instream testAvail_One;
             if(!testAvail_One.isAvailable(_T("?")))
@@ -3177,7 +3177,7 @@ bool validate_SENC_server(void)
             }
             nLoop--;
         }
-        
+
         if(!bAvail){
             wxString msg = _("oeserverd utility at \n");
             msg += _T("{");
@@ -3186,19 +3186,19 @@ bool validate_SENC_server(void)
             msg += _(" reports Unavailable.\n\n");
             //            OCPNMessageBox_PlugIn(NULL, msg, _("oesenc_pi Message"),  wxOK, -1, -1);
             wxLogMessage(_T("oesenc_pi: ") + msg);
-            
+
             ///_sencutil_bin.Clear();
             return false;
-            
+
         }
         else{
             wxString nc;
             nc.Printf(_T("LoopCount: %d"), nLoop);
-            
+
             //  Get the decrypt type into the logfile
             Osenc_instream testAvail_type;
             testAvail_type.isAvailable( g_UserKey );
-            
+
             wxLogMessage(_T("oesenc_pi: oeserverd Check OK...") + nc);
         }
     }
@@ -3210,17 +3210,17 @@ bool validate_SENC_server(void)
         msg += _(" could not be started.\n\n");
         OCPNMessageBox_PlugIn(NULL, msg, _("oeSENC_pi Message"),  wxOK, -1, -1);
         wxLogMessage(_T("oesenc_pi: ") + msg);
-        
+
         g_sencutil_bin.Clear();
         return false;
     }
-    
+
     return true;
 }
 
 bool shutdown_SENC_server( void )
 {
-    
+
     // Check to see if the server is already running, and available
     Osenc_instream testAvail;
     if(1){
@@ -3236,50 +3236,50 @@ bool shutdown_SENC_server( void )
 bool CheckPendingJNIException()
 {
     JNIEnv* jenv;
-    
-    if (java_vm->GetEnv( (void **) &jenv, JNI_VERSION_1_6) != JNI_OK) 
+
+    if (java_vm->GetEnv( (void **) &jenv, JNI_VERSION_1_6) != JNI_OK)
         return true;
-    
+
     if( (jenv)->ExceptionCheck() == JNI_TRUE ) {
-        
+
         // Handle exception here.
         (jenv)->ExceptionDescribe(); // writes to logcat
         (jenv)->ExceptionClear();
-        
+
         return false;           // There was a pending exception, but cleared OK
         // interesting discussion:  http://blog.httrack.com/blog/2013/08/23/catching-posix-signals-on-android/
     }
-    
+
     return false;
-    
+
 }
 
 wxString callActivityMethod_vs(const char *method)
 {
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     JNIEnv* jenv;
-    
+
     wxString return_string;
     QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative",
                                                                            "activity", "()Landroid/app/Activity;");
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     if ( !activity.isValid() ){
         //qDebug() << "Activity is not valid";
         return return_string;
     }
-    
+
     //  Call the desired method
     QAndroidJniObject data = activity.callObjectMethod(method, "()Ljava/lang/String;");
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     jstring s = data.object<jstring>();
     //qDebug() << s;
-    
+
     if(s){
         //  Need a Java environment to decode the resulting string
         if (java_vm->GetEnv( (void **) &jenv, JNI_VERSION_1_6) != JNI_OK) {
@@ -3290,7 +3290,7 @@ wxString callActivityMethod_vs(const char *method)
             return_string = wxString(ret_string, wxConvUTF8);
         }
     }
-    
+
     return return_string;
 }
 
@@ -3298,29 +3298,29 @@ wxString callActivityMethod_vs(const char *method)
 wxString callActivityMethod_s2s(const char *method, wxString parm1, wxString parm2)
 {
     wxLogMessage(_T("PI s2s: ") + parm1 + parm2);
-    
+
     if(CheckPendingJNIException())
         return _T("NOK");
     JNIEnv* jenv;
-    
+
     wxString return_string;
     QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative",
                                                                            "activity", "()Landroid/app/Activity;");
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     if ( !activity.isValid() ){
         return return_string;
     }
-    
+
     //  Need a Java environment to decode the resulting string
     if (java_vm->GetEnv( (void **) &jenv, JNI_VERSION_1_6) != JNI_OK) {
         return _T("jenv Error");
     }
-    
+
      wxCharBuffer p1b = parm1.ToUTF8();
      jstring p1 = (jenv)->NewStringUTF(p1b.data());
-     
+
      wxCharBuffer p2b = parm2.ToUTF8();
      jstring p2 = (jenv)->NewStringUTF(p2b.data());
 
@@ -3329,25 +3329,25 @@ wxString callActivityMethod_s2s(const char *method, wxString parm1, wxString par
          wxString vw_string = wxString(v_string, wxConvUTF8);
          wxLogMessage(_T("PI s2s p2String: ") + vw_string);
      }
-     
+
     QAndroidJniObject data = activity.callObjectMethod(method, "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;", p1, p2);
-    
+
     (jenv)->DeleteLocalRef(p1);
     (jenv)->DeleteLocalRef(p2);
-    
+
     if(CheckPendingJNIException())
         return _T("NOK");
-    
-        
+
+
     jstring s = data.object<jstring>();
-        
+
     if( (jenv)->GetStringLength( s )){
             const char *ret_string = (jenv)->GetStringUTFChars(s, NULL);
             return_string = wxString(ret_string, wxConvUTF8);
     }
-        
+
     return return_string;
-        
+
 }
 
 wxString callActivityMethod_s4s(const char *method, wxString parm1, wxString parm2, wxString parm3, wxString parm4)
@@ -3355,55 +3355,55 @@ wxString callActivityMethod_s4s(const char *method, wxString parm1, wxString par
     if(CheckPendingJNIException())
         return _T("NOK");
     JNIEnv* jenv;
-    
+
     wxString return_string;
     QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative",
                                                                            "activity", "()Landroid/app/Activity;");
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     if ( !activity.isValid() ){
         return return_string;
     }
-    
+
     //  Need a Java environment to decode the resulting string
     if (java_vm->GetEnv( (void **) &jenv, JNI_VERSION_1_6) != JNI_OK) {
         return _T("jenv Error");
     }
-    
+
     wxCharBuffer p1b = parm1.ToUTF8();
     jstring p1 = (jenv)->NewStringUTF(p1b.data());
-    
+
     wxCharBuffer p2b = parm2.ToUTF8();
     jstring p2 = (jenv)->NewStringUTF(p2b.data());
-    
+
     wxCharBuffer p3b = parm3.ToUTF8();
     jstring p3 = (jenv)->NewStringUTF(p3b.data());
-    
+
     wxCharBuffer p4b = parm4.ToUTF8();
     jstring p4 = (jenv)->NewStringUTF(p4b.data());
-    
+
     QAndroidJniObject data = activity.callObjectMethod(method, "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
                                                        p1, p2, p3, p4);
     (jenv)->DeleteLocalRef(p1);
     (jenv)->DeleteLocalRef(p2);
     (jenv)->DeleteLocalRef(p3);
     (jenv)->DeleteLocalRef(p4);
-    
+
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     //qDebug() << "Back from method_s4s";
-        
+
         jstring s = data.object<jstring>();
-        
+
         if( (jenv)->GetStringLength( s )){
             const char *ret_string = (jenv)->GetStringUTFChars(s, NULL);
             return_string = wxString(ret_string, wxConvUTF8);
         }
-        
+
     return return_string;
-        
+
 }
 
 wxString callActivityMethod_s5s(const char *method, wxString parm1, wxString parm2, wxString parm3, wxString parm4, wxString parm5)
@@ -3411,37 +3411,37 @@ wxString callActivityMethod_s5s(const char *method, wxString parm1, wxString par
     if(CheckPendingJNIException())
         return _T("NOK");
     JNIEnv* jenv;
-    
+
     wxString return_string;
     QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative",
                                                                            "activity", "()Landroid/app/Activity;");
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     if ( !activity.isValid() ){
         return return_string;
     }
-    
+
     //  Need a Java environment to decode the resulting string
     if (java_vm->GetEnv( (void **) &jenv, JNI_VERSION_1_6) != JNI_OK) {
         return _T("jenv Error");
     }
-    
+
     wxCharBuffer p1b = parm1.ToUTF8();
     jstring p1 = (jenv)->NewStringUTF(p1b.data());
-    
+
     wxCharBuffer p2b = parm2.ToUTF8();
     jstring p2 = (jenv)->NewStringUTF(p2b.data());
-    
+
     wxCharBuffer p3b = parm3.ToUTF8();
     jstring p3 = (jenv)->NewStringUTF(p3b.data());
-    
+
     wxCharBuffer p4b = parm4.ToUTF8();
     jstring p4 = (jenv)->NewStringUTF(p4b.data());
-    
+
     wxCharBuffer p5b = parm5.ToUTF8();
     jstring p5 = (jenv)->NewStringUTF(p5b.data());
-    
+
     QAndroidJniObject data = activity.callObjectMethod(method, "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
                                                        p1, p2, p3, p4, p5);
     (jenv)->DeleteLocalRef(p1);
@@ -3449,19 +3449,19 @@ wxString callActivityMethod_s5s(const char *method, wxString parm1, wxString par
     (jenv)->DeleteLocalRef(p3);
     (jenv)->DeleteLocalRef(p4);
     (jenv)->DeleteLocalRef(p5);
-    
+
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     jstring s = data.object<jstring>();
-        
+
     if( (jenv)->GetStringLength( s )){
         const char *ret_string = (jenv)->GetStringUTFChars(s, NULL);
         return_string = wxString(ret_string, wxConvUTF8);
     }
-        
+
     return return_string;
-        
+
 }
 
 wxString callActivityMethod_s6s(const char *method, wxString parm1, wxString parm2, wxString parm3, wxString parm4, wxString parm5, wxString parm6)
@@ -3469,40 +3469,40 @@ wxString callActivityMethod_s6s(const char *method, wxString parm1, wxString par
     if(CheckPendingJNIException())
         return _T("NOK");
     JNIEnv* jenv;
-    
+
     wxString return_string;
     QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative",
                                                                            "activity", "()Landroid/app/Activity;");
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     if ( !activity.isValid() ){
         return return_string;
     }
-    
+
     //  Need a Java environment to decode the resulting string
     if (java_vm->GetEnv( (void **) &jenv, JNI_VERSION_1_6) != JNI_OK) {
         return _T("jenv Error");
     }
-    
+
     wxCharBuffer p1b = parm1.ToUTF8();
     jstring p1 = (jenv)->NewStringUTF(p1b.data());
-    
+
     wxCharBuffer p2b = parm2.ToUTF8();
     jstring p2 = (jenv)->NewStringUTF(p2b.data());
-    
+
     wxCharBuffer p3b = parm3.ToUTF8();
     jstring p3 = (jenv)->NewStringUTF(p3b.data());
-    
+
     wxCharBuffer p4b = parm4.ToUTF8();
     jstring p4 = (jenv)->NewStringUTF(p4b.data());
-    
+
     wxCharBuffer p5b = parm5.ToUTF8();
     jstring p5 = (jenv)->NewStringUTF(p5b.data());
 
     wxCharBuffer p6b = parm6.ToUTF8();
     jstring p6 = (jenv)->NewStringUTF(p6b.data());
-    
+
     QAndroidJniObject data = activity.callObjectMethod(method, "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
                                                        p1, p2, p3, p4, p5, p6);
     (jenv)->DeleteLocalRef(p1);
@@ -3511,19 +3511,19 @@ wxString callActivityMethod_s6s(const char *method, wxString parm1, wxString par
     (jenv)->DeleteLocalRef(p4);
     (jenv)->DeleteLocalRef(p5);
     (jenv)->DeleteLocalRef(p6);
-    
+
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     jstring s = data.object<jstring>();
-    
+
     if( (jenv)->GetStringLength( s )){
         const char *ret_string = (jenv)->GetStringUTFChars(s, NULL);
         return_string = wxString(ret_string, wxConvUTF8);
     }
-    
+
     return return_string;
-    
+
 }
 
 
@@ -3532,43 +3532,43 @@ wxString callActivityMethod_ss(const char *method, wxString parm)
     if(CheckPendingJNIException())
         return _T("NOK");
     JNIEnv* jenv;
-    
+
     wxString return_string;
     QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative",
                                                                            "activity", "()Landroid/app/Activity;");
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
     if ( !activity.isValid() ){
         return return_string;
     }
-    
+
     //  Need a Java environment to decode the resulting string
     if (java_vm->GetEnv( (void **) &jenv, JNI_VERSION_1_6) != JNI_OK) {
         return _T("jenv Error");
     }
-    
+
     jstring p = (jenv)->NewStringUTF(parm.c_str());
-    
-    
+
+
     QAndroidJniObject data = activity.callObjectMethod(method, "(Ljava/lang/String;)Ljava/lang/String;", p);
-    
+
     (jenv)->DeleteLocalRef(p);
-    
+
     if(CheckPendingJNIException())
         return _T("NOK");
-    
+
 //    qDebug() << "OK return";
-    
+
 //    return _T("OK");
-    
+
     jstring s = data.object<jstring>();
-        
+
     if( (jenv)->GetStringLength( s )){
         const char *ret_string = (jenv)->GetStringUTFChars(s, NULL);
         return_string = wxString(ret_string, wxConvUTF8);
     }
-        
+
     return return_string;
 }
 
@@ -3583,26 +3583,26 @@ END_EVENT_TABLE()
 oesencPrefsDialog::oesencPrefsDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style )
 {
     wxDialog::Create( parent, id, title, pos, size, style );
-    
+
 #ifdef __OCPN__ANDROID__
     SetBackgroundColour(ANDROID_DIALOG_BACKGROUND_COLOR);
-#endif    
-    
+#endif
+
         this->SetSizeHints( wxDefaultSize, wxDefaultSize );
-    
+
         wxBoxSizer* bSizerTop = new wxBoxSizer( wxVERTICAL );
-        
+
         wxPanel *content = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBG_STYLE_ERASE );
         bSizerTop->Add(content, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
-        
+
         wxBoxSizer* bSizer2 = new wxBoxSizer( wxVERTICAL );
         content->SetSizer(bSizer2);
-        
+
         // Plugin Version
         wxString versionText = _T(" oeSENC Version: ") + g_versionString;
         wxStaticText *versionTextBox = new wxStaticText(content, wxID_ANY, versionText);
         bSizer2->Add(versionTextBox, 1, wxALL | wxALIGN_CENTER_HORIZONTAL, 20 );
- 
+
         //  Show EULA
         m_buttonShowEULA = new wxButton( content, wxID_ANY, _("Show EULA"), wxDefaultPosition, wxDefaultSize, 0 );
         bSizer2->AddSpacer( 10 );
@@ -3610,7 +3610,7 @@ oesencPrefsDialog::oesencPrefsDialog( wxWindow* parent, wxWindowID id, const wxS
         m_buttonShowEULA->Connect( wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(oesenc_pi_event_handler::OnShowEULA), NULL, g_event_handler );
         bSizer2->AddSpacer( 20 );
 
-#ifndef __OCPN__ANDROID__        
+#ifndef __OCPN__ANDROID__
         //  FPR File Permit
         wxStaticBoxSizer* sbSizerFPR= new wxStaticBoxSizer( new wxStaticBox( content, wxID_ANY, _("System Identification") ), wxHORIZONTAL );
         m_fpr_text = new wxStaticText(content, wxID_ANY, _T(" "));
@@ -3618,26 +3618,26 @@ oesencPrefsDialog::oesencPrefsDialog( wxWindow* parent, wxWindowID id, const wxS
              m_fpr_text->SetLabel( wxFileName::FileName(g_fpr_file).GetFullName() );
         else
              m_fpr_text->SetLabel( _T("                  "));
-         
+
         sbSizerFPR->Add(m_fpr_text, wxEXPAND);
         bSizer2->Add(sbSizerFPR, 0, wxEXPAND, 50 );
 
         m_buttonNewFPR = new wxButton( content, wxID_ANY, _("Create System Identifier file..."), wxDefaultPosition, wxDefaultSize, 0 );
-        
+
         bSizer2->AddSpacer( 5 );
         bSizer2->Add( m_buttonNewFPR, 0, wxALIGN_CENTER_HORIZONTAL, 50 );
-        
+
         m_buttonNewFPR->Connect( wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(oesenc_pi_event_handler::OnNewFPRClick), NULL, g_event_handler );
 
-#ifndef OCPN_ARM64        
+#ifndef OCPN_ARM64
         m_buttonNewDFPR = new wxButton( content, wxID_ANY, _("Create USB key System ID file..."), wxDefaultPosition, wxDefaultSize, 0 );
-        
+
         bSizer2->AddSpacer( 5 );
         bSizer2->Add( m_buttonNewDFPR, 0, wxALIGN_CENTER_HORIZONTAL, 50 );
-        
+
         m_buttonNewDFPR->Connect( wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(oesenc_pi_event_handler::OnNewDFPRClick), NULL, g_event_handler );
 #endif
-            
+
 #ifdef __WXMAC__
         m_buttonShowFPR = new wxButton( content, wxID_ANY, _("Show In Finder"), wxDefaultPosition, wxDefaultSize, 0 );
 #else
@@ -3650,7 +3650,7 @@ oesencPrefsDialog::oesencPrefsDialog( wxWindow* parent, wxWindowID id, const wxS
 
         m_buttonShowFPR->Connect( wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(oesenc_pi_event_handler::OnShowFPRClick), NULL, g_event_handler );
 
-#endif        
+#endif
         // System Name
         if(g_systemName.Length()){
             wxString nameText = _T(" System Name: ") + g_systemName;
@@ -3660,42 +3660,42 @@ oesencPrefsDialog::oesencPrefsDialog( wxWindow* parent, wxWindowID id, const wxS
         }
         else
             bSizer2->AddSpacer( 10 );
- 
-#ifndef __OCPN__ANDROID__        
+
+#ifndef __OCPN__ANDROID__
         m_buttonClearSystemName = new wxButton( content, wxID_ANY, _("Reset System Name"), wxDefaultPosition, wxDefaultSize, 0 );
-        
+
         bSizer2->AddSpacer( 10 );
         bSizer2->Add( m_buttonClearSystemName, 0, wxALIGN_CENTER_HORIZONTAL, 50 );
-        
+
         m_buttonClearSystemName->Connect( wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(oesenc_pi_event_handler::OnClearSystemName), NULL, g_event_handler );
-        
+
         if(!g_systemName.Length())
             m_buttonClearSystemName->Disable();
-        
+
         m_buttonClearCreds = new wxButton( content, wxID_ANY, _("Reset o-charts credentials"), wxDefaultPosition, wxDefaultSize, 0 );
-        
+
         bSizer2->AddSpacer( 10 );
         bSizer2->Add( m_buttonClearCreds, 0, wxALIGN_CENTER_HORIZONTAL, 50 );
-        
+
         m_buttonClearCreds->Connect( wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(oesenc_pi_event_handler::OnClearCredentials), NULL, g_event_handler );
-        
-        
+
+
 #endif
-            
+
         m_sdbSizer1 = new wxStdDialogButtonSizer();
         m_sdbSizer1OK = new wxButton( content, wxID_OK );
         m_sdbSizer1->AddButton( m_sdbSizer1OK );
         m_sdbSizer1Cancel = new wxButton( content, wxID_CANCEL );
         m_sdbSizer1->AddButton( m_sdbSizer1Cancel );
         m_sdbSizer1->Realize();
-        
+
         bSizer2->Add( m_sdbSizer1, 0, wxBOTTOM|wxEXPAND|wxTOP, 20 );
-        
-        
+
+
         this->SetSizer( bSizerTop );
         this->Layout();
         bSizerTop->Fit( this );
-        
+
         this->Centre( wxBOTH );
 }
 
@@ -3705,9 +3705,9 @@ oesencPrefsDialog::~oesencPrefsDialog()
 
 void oesencPrefsDialog::OnPrefsOkClick(wxCommandEvent& event)
 {
-#if 0    
+#if 0
     m_trackedPointName = m_wpComboPort->GetValue();
-    
+
     wxArrayString guidArray = GetWaypointGUIDArray();
     for(unsigned int i=0 ; i < guidArray.GetCount() ; i++){
         wxString name = getWaypointName( guidArray[i] );
@@ -3720,7 +3720,7 @@ void oesencPrefsDialog::OnPrefsOkClick(wxCommandEvent& event)
     }
 #endif
     EndModal( wxID_OK );
- 
+
 }
 
 #ifdef __OCPN__ANDROID__
@@ -3728,7 +3728,7 @@ void androidGetDeviceName()
 {
     if(!g_deviceInfo.Length())
         g_deviceInfo = callActivityMethod_vs("getDeviceInfo");
-    
+
     wxStringTokenizer tkz(g_deviceInfo, _T("\n"));
     while( tkz.HasMoreTokens() )
     {
@@ -3741,7 +3741,7 @@ void androidGetDeviceName()
             }
         }
     }
-    
+
 }
 #endif
 
@@ -3750,9 +3750,9 @@ bool IsDongleAvailable()
     wxString cmd = g_sencutil_bin;
     cmd += _T(" -s ");                  // Available?
 
-    wxArrayString ret_array, err_array;      
+    wxArrayString ret_array, err_array;
     wxExecute(cmd, ret_array, err_array );
-            
+
     for(unsigned int i=0 ; i < ret_array.GetCount() ; i++){
         wxString line = ret_array[i];
         if(line.IsSameAs(_T("1")))
@@ -3769,84 +3769,84 @@ bool IsDongleAvailable()
     }
 
     g_sencutil_bin.Clear();
-    
+
     return false;
 }
 
 unsigned int GetDongleSN()
 {
     unsigned int rv = 0;
-    
+
     wxString cmd = g_sencutil_bin;
     cmd += _T(" -t ");                  // SN
 
-    wxArrayString ret_array;      
+    wxArrayString ret_array;
     wxExecute(cmd, ret_array, ret_array );
-            
+
     for(unsigned int i=0 ; i < ret_array.GetCount() ; i++){
         wxString line = ret_array[i];
         long sn;
         line.ToLong(&sn, 10);
         rv = sn;
     }
-    
+
     return rv;
 }
-    
-    
+
+
 wxString getFPR( bool bCopyToDesktop, bool &bCopyOK, bool bSGLock)
 {
-            
+
             wxString msg1;
             wxString fpr_file;
             wxString fpr_dir = *GetpPrivateApplicationDataLocation(); //GetWritableDocumentsDir();
-            
+
 #ifdef __WXMSW__
-            
+
             //  On XP, we simply use the root directory, since any other directory may be hidden
             int major, minor;
             ::wxGetOsVersion( &major, &minor );
             if( (major == 5) && (minor == 1) )
                 fpr_dir = _T("C:\\");
-#endif        
-            
+#endif
+
             if( fpr_dir.Last() != wxFileName::GetPathSeparator() )
                 fpr_dir += wxFileName::GetPathSeparator();
-            
+
             wxString cmd = g_sencutil_bin;
             if(bSGLock)
                 cmd += _T(" -k ");                  // Make SGLock fingerprint
             else
                 cmd += _T(" -g ");                  // Make fingerprint
-            
+
 #ifndef __WXMSW__
             cmd += _T("\"");
             cmd += fpr_dir;
-            
+
             //cmd += _T("my fpr/");             // testing
-            
+
             //            wxString tst_cedilla = wxString::Format(_T("my fpr copy %cCedilla/"), 0x00E7);       // testing French cedilla
             //            cmd += tst_cedilla;            // testing
-            
+
             cmd += _T("\"");
 #else
-            cmd += wxString('\"'); 
+            cmd += wxString('\"');
             cmd += fpr_dir;
-            
+
             //            cmd += _T("my fpr\\");            // testing spaces in path
-            
+
             //            wxString tst_cedilla = wxString::Format(_T("my%c\\"), 0x00E7);       // testing French cedilla
             //            cmd += tst_cedilla;            // testing
-#endif            
+#endif
             wxLogMessage(_T("Create FPR command: ") + cmd);
-            
+
             ::wxBeginBusyCursor();
-            
-            wxArrayString ret_array;      
+
+            wxArrayString ret_array;
             wxExecute(cmd, ret_array, ret_array );
-            
+
             ::wxEndBusyCursor();
-            
+
             bool berr = false;
             for(unsigned int i=0 ; i < ret_array.GetCount() ; i++){
                 wxString line = ret_array[i];
@@ -3858,7 +3858,7 @@ wxString getFPR( bool bCopyToDesktop, bool &bCopyOK, bool bSGLock)
                 if(line.Upper().Find(_T("FPR")) != wxNOT_FOUND){
                     fpr_file = line.AfterFirst(':');
                 }
-                
+
             }
             if(!berr){
                 if(fpr_file.IsEmpty()){                 // Probably dongle not present
@@ -3866,75 +3866,75 @@ wxString getFPR( bool bCopyToDesktop, bool &bCopyOK, bool bSGLock)
                     return fpr_file;
                 }
             }
-            
-            
+
+
             bool berror = false;
-            
+
             if( bCopyToDesktop && !berr && fpr_file.Length()){
-                
+
                 bool bcopy = false;
                 wxString sdesktop_path;
-                
+
 #ifdef __WXMSW__
                 TCHAR desktop_path[MAX_PATH*2] = { 0 };
                 bool bpathGood = false;
                 HRESULT  hr;
                 HANDLE ProcToken = NULL;
                 OpenProcessToken( GetCurrentProcess(), TOKEN_READ, &ProcToken );
-                
+
                 hr = SHGetFolderPath( NULL,  CSIDL_DESKTOPDIRECTORY, ProcToken, 0, desktop_path);
-                if (SUCCEEDED(hr))    
+                if (SUCCEEDED(hr))
                     bpathGood = true;
-                
+
                 CloseHandle( ProcToken );
-                
+
                 //                wchar_t *desktop_path = 0;
                 //                bool bpathGood = false;
-                
+
                 //               if( (major == 5) && (minor == 1) ){             //XP
                 //                    if(S_OK == SHGetFolderPath( (HWND)0,  CSIDL_DESKTOPDIRECTORY, NULL, SHGFP_TYPE_CURRENT, desktop_path))
                 //                        bpathGood = true;
-                
-                
+
+
                 //                 }
                 //                 else{
                     //                     if(S_OK == SHGetKnownFolderPath( FOLDERID_Desktop, 0, 0, &desktop_path))
                 //                         bpathGood = true;
                 //                 }
-                
-                
+
+
                 if(bpathGood){
-                    
+
                     char str[128];
                     wcstombs(str, desktop_path, 128);
                     wxString desktop_fpr(str, wxConvAuto());
-                    
+
                     sdesktop_path = desktop_fpr;
                     if( desktop_fpr.Last() != wxFileName::GetPathSeparator() )
                         desktop_fpr += wxFileName::GetPathSeparator();
-                    
+
                     wxFileName fn(fpr_file);
                     wxString desktop_fpr_file = desktop_fpr + fn.GetFullName();
-                    
-                    
+
+
                     wxString exe = _T("xcopy");
                     wxString parms = fpr_file.Trim() + _T(" ") + wxString('\"') + desktop_fpr + wxString('\"');
                     wxLogMessage(_T("FPR copy command: ") + exe + _T(" ") + parms);
-                    
+
                     const wchar_t *wexe = exe.wc_str(wxConvUTF8);
                     const wchar_t *wparms = parms.wc_str(wxConvUTF8);
-                    
+
                     if( (major == 5) && (minor == 1) ){             //XP
                         // For some reason, this does not work...
                         //8:43:13 PM: Error: Failed to copy the file 'C:\oc01W_1481247791.fpr' to '"C:\Documents and Settings\dsr\Desktop\oc01W_1481247791.fpr"'
                         //                (error 123: the filename, directory name, or volume label syntax is incorrect.)
                         //8:43:15 PM: oesenc fpr file created as: C:\oc01W_1481247791.fpr
-                        
+
                         bcopy = wxCopyFile(fpr_file.Trim(false), _T("\"") + desktop_fpr_file + _T("\""));
                     }
                     else{
                         ::wxBeginBusyCursor();
-                        
+
                         // Launch oeserverd as admin
                         SHELLEXECUTEINFO sei = { sizeof(sei) };
                         sei.lpVerb = L"runas";
@@ -3943,7 +3943,7 @@ wxString getFPR( bool bCopyToDesktop, bool &bCopyOK, bool bSGLock)
                         sei.lpParameters = wparms;
                         sei.nShow = SW_SHOWMINIMIZED;
                         sei.fMask = SEE_MASK_NOASYNC;
-                        
+
                         if (!ShellExecuteEx(&sei))
                         {
                             DWORD dwError = GetLastError();
@@ -3956,10 +3956,10 @@ wxString getFPR( bool bCopyToDesktop, bool &bCopyOK, bool bSGLock)
                         }
                         else
                             bcopy = true;
-                        
+
                         ::wxEndBusyCursor();
-                        
-                    }  
+
+                    }
                 }
 #endif            // MSW
 
@@ -3967,17 +3967,17 @@ wxString getFPR( bool bCopyToDesktop, bool &bCopyOK, bool bSGLock)
                 wxFileName fn(fpr_file);
                 wxString desktop_fpr_path = ::wxGetHomeDir() + wxFileName::GetPathSeparator() +
                 _T("Desktop") + wxFileName::GetPathSeparator() + fn.GetFullName();
-                
+
                 bcopy =  ::wxCopyFile(fpr_file.Trim(false), desktop_fpr_path);
                 sdesktop_path = desktop_fpr_path;
                 msg1 += _T("\n\n OSX ");
 #endif
-                
-                
+
+
                 wxLogMessage(_T("oeSENC fpr file created as: ") + fpr_file);
                 if(bCopyToDesktop && bcopy)
                     wxLogMessage(_T("oeSENC fpr file created in desktop folder: ") + sdesktop_path);
-                
+
                 if(bcopy)
                     bCopyOK = true;
         }
@@ -3989,12 +3989,12 @@ wxString getFPR( bool bCopyToDesktop, bool &bCopyOK, bool bSGLock)
             }
             berror = true;
         }
-        
+
         if(berror)
             return _T("");
         else
             return fpr_file;
-        
+
 }
 
 
@@ -4013,7 +4013,7 @@ oesenc_pi_event_handler::oesenc_pi_event_handler(oesenc_pi *parent)
     m_parent = parent;
     m_eventTimer.SetOwner( this, ANDROID_EVENT_TIMER );
     m_timerAction = -1;
-    
+
 }
 
 oesenc_pi_event_handler::~oesenc_pi_event_handler()
@@ -4022,22 +4022,22 @@ oesenc_pi_event_handler::~oesenc_pi_event_handler()
 
 void oesenc_pi_event_handler::onTimerEvent(wxTimerEvent &event)
 {
-#ifdef __OCPN__ANDROID__    
+#ifdef __OCPN__ANDROID__
     if(ACTION_ARB_RESULT_POLL == m_timerAction){
         wxString status = callActivityMethod_vs("getArbActivityStatus");
         //qDebug() << status.mb_str();
-        
+
         if(status == _T("COMPLETE")){
             m_eventTimer.Stop();
             m_timerAction = -1;
-            
+
             qDebug() << "Got COMPLETE";
             wxString result = callActivityMethod_vs("getArbActivityResult");
             qDebug() << result.mb_str();
             processArbResult(result);
         }
     }
-#endif    
+#endif
 }
 
 void oesenc_pi_event_handler::processArbResult( wxString result )
@@ -4051,7 +4051,7 @@ void oesenc_pi_event_handler::OnShowFPRClick( wxCommandEvent &event )
 #ifdef __WXMAC__
     wxExecute( wxString::Format("open -R %s", g_fpr_file) );
 #endif
-#ifdef __WXMSW__		 
+#ifdef __WXMSW__		
     wxExecute( wxString::Format("explorer.exe /select,%s", g_fpr_file) );
 #endif
 #ifdef __WXGTK__
@@ -4065,15 +4065,15 @@ void oesenc_pi_event_handler::OnClearSystemName( wxCommandEvent &event )
     msg += _T("\n\n");
     msg += _("Proceed to RESET?");
     int ret = OCPNMessageBox_PlugIn(NULL, msg, _("oeSENC_PI Message"), wxYES_NO);
-    
+
     if(ret != wxID_YES)
         return;
-        
+
     g_systemName.Clear();
     if(g_prefs_dialog){
         g_prefs_dialog->m_nameTextBox->SetLabel(_T(" "));
         g_prefs_dialog->m_buttonClearSystemName->Disable();
-        
+
         g_prefs_dialog->Refresh(true);
     }
     wxFileConfig *pConf = GetOCPNConfigObject();
@@ -4081,30 +4081,30 @@ void oesenc_pi_event_handler::OnClearSystemName( wxCommandEvent &event )
         pConf->SetPath( _T("/PlugIns/oesenc") );
         pConf->Write( _T("systemName"), g_systemName);
     }
-    
-#ifndef __OCPN__ANDROID__    
+
+#ifndef __OCPN__ANDROID__
     if(m_parent->m_shoppanel){
         m_parent->m_shoppanel->RefreshSystemName();
     }
-#endif    
-        
+#endif
+
 }
 
 void oesenc_pi_event_handler::OnShowEULA( wxCommandEvent &event )
 {
     ChartSetEULA *CSE;
-    
+
     for(unsigned int i=0 ; i < g_EULAArray.GetCount() ; i++){
         CSE = g_EULAArray.Item(i);
         wxString file = CSE->fileName;
         file.Replace('!', wxFileName::GetPathSeparator());
-        
+
         if(wxFileExists(file)){
             oesenc_pi_about *pab = new oesenc_pi_about( GetOCPNCanvasWindow(), file );
             pab->SetOKMode();
             pab->ShowModal();
             pab->Destroy();
-        
+
             break;                      // once is enough
         }
     }
@@ -4116,14 +4116,14 @@ void oesenc_pi_event_handler::OnClearCredentials( wxCommandEvent &event )
 {
     g_loginKey.Clear();
     saveShopConfig();
-    
+
     OCPNMessageBox_PlugIn(NULL, _("Credential Reset Successful"), _("oeSENC_pi Message"), wxOK);
- 
+
 }
 
 void oesenc_pi_event_handler::OnNewDFPRClick( wxCommandEvent &event )
 {
-#ifndef __OCPN__ANDROID__    
+#ifndef __OCPN__ANDROID__
     wxString msg = _("To obtain a chart set, you must generate a Unique System Identifier File.\n");
     msg += _("This file is also known as a\"fingerprint\" file.\n");
     msg += _("The fingerprint file contains information related to a connected USB key dongle.\n\n");
@@ -4132,37 +4132,37 @@ void oesenc_pi_event_handler::OnNewDFPRClick( wxCommandEvent &event )
 
 
     int ret = OCPNMessageBox_PlugIn(NULL, msg, _("oeSENC_PI Message"), wxYES_NO);
-    
+
     if(ret == wxID_YES){
         wxString msg1;
-        
+
         bool b_copyOK = false;
         wxString fpr_file = getFPR( true , b_copyOK, true);
-        
+
         // Check for missing dongle...
         if(fpr_file.IsSameAs(_T("DONGLE_NOT_PRESENT"))){
             OCPNMessageBox_PlugIn(NULL, _T("ERROR Creating Fingerprint file\n USB key dongle not detected."), _("oeSENC_pi Message"), wxOK);
             return;
         }
-        
+
         if(fpr_file.Len()){
             msg1 += _("Fingerprint file created.\n");
             msg1 += fpr_file;
-            
+
             if(b_copyOK)
                 msg1 += _("\n\n Fingerprint file is also copied to desktop.");
-            
+
             OCPNMessageBox_PlugIn(NULL, msg1, _("oeSENC_pi Message"), wxOK);
-            
+
             m_parent->Set_FPR();
-            
+
         }
         else{
             OCPNMessageBox_PlugIn(NULL, _T("ERROR Creating Fingerprint file\n Check OpenCPN log file."), _("oeSENC_pi Message"), wxOK);
         }
-        
+
         g_fpr_file = fpr_file;
-        
+
     }           // yes
 #endif
 }
@@ -4171,7 +4171,7 @@ void oesenc_pi_event_handler::OnNewDFPRClick( wxCommandEvent &event )
 
 void oesenc_pi_event_handler::OnNewFPRClick( wxCommandEvent &event )
 {
-#ifndef __OCPN__ANDROID__    
+#ifndef __OCPN__ANDROID__
     wxString msg = _("To obtain a chart set, you must generate a Unique System Identifier File.\n");
     msg += _("This file is also known as a\"fingerprint\" file.\n");
     msg += _("The fingerprint file contains information to uniquely identify this computer.\n\n");
@@ -4179,31 +4179,31 @@ void oesenc_pi_event_handler::OnNewFPRClick( wxCommandEvent &event )
     msg += _("Proceed to create Fingerprint file?");
 
     int ret = OCPNMessageBox_PlugIn(NULL, msg, _("oeSENC_PI Message"), wxYES_NO);
-    
+
     if(ret == wxID_YES){
         wxString msg1;
-        
+
         bool b_copyOK = false;
         wxString fpr_file = getFPR( true , b_copyOK, false);
-        
+
         if(fpr_file.Len()){
             msg1 += _("Fingerprint file created.\n");
             msg1 += fpr_file;
-            
+
             if(b_copyOK)
                 msg1 += _("\n\n Fingerprint file is also copied to desktop.");
-            
+
             OCPNMessageBox_PlugIn(NULL, msg1, _("oeSENC_pi Message"), wxOK);
-            
+
             m_parent->Set_FPR();
-            
+
         }
         else{
             OCPNMessageBox_PlugIn(NULL, _T("ERROR Creating Fingerprint file\n Check OpenCPN log file."), _("oeSENC_pi Message"), wxOK);
         }
-        
+
         g_fpr_file = fpr_file;
-        
+
     }           // yes
 #else                   // Android
 
@@ -4218,21 +4218,21 @@ void oesenc_pi_event_handler::OnNewFPRClick( wxCommandEvent &event )
         dataDir += _T("cache/");
 
         wxString rootDir = fn.GetPath(wxPATH_GET_SEPARATOR);
-        
+
         //  Set up the parameter passed to runtime environment as LD_LIBRARY_PATH
         // This will be {dir of g_sencutil_bin}/lib
         wxFileName fnl(cmd);
         wxString libDir = fnl.GetPath(wxPATH_GET_SEPARATOR) + _T("lib");
-        
+
         wxLogMessage(_T("oesenc_pi: Getting XFPR: Starting: ") + cmd );
 
         wxString result = callActivityMethod_s6s("createProcSync4", cmd, _T("-q"), rootDir, _T("-g"), dataDir, libDir);
 
         wxLogMessage(_T("oesenc_pi: Start Result: ") + result);
 
-        
+
         wxString sFPRPlus;              // The composite string we will pass to the management activity
-        
+
         // Convert the XFPR to an ASCII string for transmission inter-process...
         // Find the file...
         wxArrayString files;
@@ -4249,9 +4249,9 @@ void oesenc_pi_event_handler::OnNewFPRClick( wxCommandEvent &event )
                 }
             }
         }
-        
+
         qDebug() << "last FPR file: " << lastFile.mb_str();
-            
+
         //Read the file, convert to ASCII hex, and build a string
         if(::wxFileExists(lastFile)){
             wxString stringFPR;
@@ -4264,68 +4264,68 @@ void oesenc_pi_event_handler::OnNewFPRClick( wxCommandEvent &event )
                     stringFPR += sc;
                 }
             }
-            sFPRPlus += _T("FPR:");                 // name        
+            sFPRPlus += _T("FPR:");                 // name
             sFPRPlus += stringFPR;                  // values
             sFPRPlus += _T(";");                    // delimiter
         }
-        
+
         //  Add the filename
         wxFileName fnxpr(lastFile);
         wxString fprName = fnxpr.GetName();
-        sFPRPlus += _T("fprName:");                 // name        
+        sFPRPlus += _T("fprName:");                 // name
         sFPRPlus += fprName;                  // values
         sFPRPlus += _T(".fpr");
         sFPRPlus += _T(";");                    // delimiter
-        
+
 
         // We can safely delete the FPR file now.
         if(::wxFileExists(lastFile))
             wxRemoveFile( lastFile );
-        
+
         // Get and add other name/value pairs to the sFPRPlus string
         sFPRPlus += _T("User:");
         sFPRPlus += g_loginUser;
         sFPRPlus += _T(";");                    // delimiter
-        
+
         sFPRPlus += _T("loginKey:");
         if(!g_loginKey.Length())
             sFPRPlus += _T("?");
         else
             sFPRPlus += g_loginKey;
         sFPRPlus += _T(";");                    // delimiter
-        
+
         //  System Name
         sFPRPlus += _T("systemName:");
         sFPRPlus += g_systemName;
         sFPRPlus += _T(";");                    // delimiter
-        
+
         //  ADMIN mode bit
         sFPRPlus += _T("ADMIN:");
         sFPRPlus += g_admin ? _T("1"):_T("0");
         sFPRPlus += _T(";");                    // delimiter
-        
+
         qDebug() << "sFPRPlus: " << sFPRPlus.mb_str();
-        
+
         m_eventTimer.Stop();
-            
+
         wxLogMessage(_T("sFPRPlus: ") + sFPRPlus);
-        
+
         // Start the Chart management activity
         callActivityMethod_s5s( "startActivityWithIntent", _T("org.opencpn.oesencplugin"), _T("ChartsetListActivity"), _T("FPRPlus"), sFPRPlus, _T("ManageResult") );
-        
+
         // Start a timer to poll for results.
         m_timerAction = ACTION_ARB_RESULT_POLL;
         m_eventTimer.Start(1000, wxTIMER_CONTINUOUS);
-        
-        
+
+
 #endif
-        
+
 }
 
 
 void oesenc_pi_event_handler::OnManageShopClick( wxCommandEvent &event )
 {
-    
+
 #ifndef __OCPN__ANDROID__
 
         doShop();
@@ -4342,21 +4342,21 @@ void oesenc_pi_event_handler::OnManageShopClick( wxCommandEvent &event )
         dataDir += _T("cache/");
 
         wxString rootDir = fn.GetPath(wxPATH_GET_SEPARATOR);
-        
+
         //  Set up the parameter passed to runtime environment as LD_LIBRARY_PATH
         // This will be {dir of g_sencutil_bin}/lib
         wxFileName fnl(cmd);
         wxString libDir = fnl.GetPath(wxPATH_GET_SEPARATOR) + _T("lib");
-        
+
         wxLogMessage(_T("oesenc_pi: Getting XFPR: Starting: ") + cmd );
 
         wxString result = callActivityMethod_s6s("createProcSync4", cmd, _T("-q"), rootDir, _T("-g"), dataDir, libDir);
 
         wxLogMessage(_T("oesenc_pi: Start Result: ") + result);
 
-        
+
         wxString sFPRPlus;              // The composite string we will pass to the management activity
-        
+
         // Convert the XFPR to an ASCII string for transmission inter-process...
         // Find the file...
         wxArrayString files;
@@ -4373,9 +4373,9 @@ void oesenc_pi_event_handler::OnManageShopClick( wxCommandEvent &event )
                 }
             }
         }
-        
+
         qDebug() << "last FPR file: " << lastFile.mb_str();
-            
+
         //Read the file, convert to ASCII hex, and build a string
         if(::wxFileExists(lastFile)){
             wxString stringFPR;
@@ -4388,69 +4388,69 @@ void oesenc_pi_event_handler::OnManageShopClick( wxCommandEvent &event )
                     stringFPR += sc;
                 }
             }
-            sFPRPlus += _T("FPR:");                 // name        
+            sFPRPlus += _T("FPR:");                 // name
             sFPRPlus += stringFPR;                  // values
             sFPRPlus += _T(";");                    // delimiter
         }
-        
+
         //  Add the filename
         wxFileName fnxpr(lastFile);
         wxString fprName = fnxpr.GetName();
-        sFPRPlus += _T("fprName:");                 // name        
+        sFPRPlus += _T("fprName:");                 // name
         sFPRPlus += fprName;                  // values
         sFPRPlus += _T(".fpr");
         sFPRPlus += _T(";");                    // delimiter
-        
+
 
         // We can safely delete the FPR file now.
         if(::wxFileExists(lastFile))
             wxRemoveFile( lastFile );
-        
+
         // Get and add other name/value pairs to the sFPRPlus string
         sFPRPlus += _T("User:");
         sFPRPlus += g_loginUser;
         sFPRPlus += _T(";");                    // delimiter
-        
+
         sFPRPlus += _T("loginKey:");
         if(!g_loginKey.Length())
             sFPRPlus += _T("?");
         else
             sFPRPlus += g_loginKey;
         sFPRPlus += _T(";");                    // delimiter
-        
+
         //  System Name
         sFPRPlus += _T("systemName:");
         sFPRPlus += g_systemName;
         sFPRPlus += _T(";");                    // delimiter
-        
+
         //  ADMIN mode bit
         sFPRPlus += _T("ADMIN:");
         sFPRPlus += g_admin ? _T("1"):_T("0");
         sFPRPlus += _T(";");                    // delimiter
-        
+
         qDebug() << "sFPRPlus: " << sFPRPlus.mb_str();
-        
+
         m_eventTimer.Stop();
-            
+
         wxLogMessage(_T("sFPRPlus: ") + sFPRPlus);
-        
+
         // Start the Chart management activity
         callActivityMethod_s5s( "startActivityWithIntent", _T("org.opencpn.oesencplugin"), _T("ChartsetListActivity"), _T("FPRPlus"), sFPRPlus, _T("ManageResult") );
-        
+
         // Start a timer to poll for results.
         m_timerAction = ACTION_ARB_RESULT_POLL;
         m_eventTimer.Start(1000, wxTIMER_CONTINUOUS);
-        
+
 
 #endif  // Android
 
-    
+
 }
 
 
 void oesenc_pi_event_handler::OnGetHWIDClick( wxCommandEvent &event )
 {
-#ifndef __OCPN__ANDROID__    
+#ifndef __OCPN__ANDROID__
 
 #else
 
@@ -4462,14 +4462,14 @@ void oesenc_pi_event_handler::OnGetHWIDClick( wxCommandEvent &event )
         wxString dataLoc = *GetpPrivateApplicationDataLocation();
         wxFileName fn(dataLoc);
         wxString dataDir = fn.GetPath(wxPATH_GET_SEPARATOR);
-        
+
         wxString rootDir = fn.GetPath(wxPATH_GET_SEPARATOR);
-        
+
         //  Set up the parameter passed to runtime environment as LD_LIBRARY_PATH
         // This will be {dir of g_sencutil_bin}/lib
         wxFileName fnl(cmd);
         wxString libDir = fnl.GetPath(wxPATH_GET_SEPARATOR) + _T("lib");
-        
+
         wxLogMessage(_T("oesenc_pi: Getting HWID: Starting: ") + cmd );
 
         wxString result = callActivityMethod_s6s("createProcSync4", cmd, _T("-q"), rootDir, _T("-w"), dataDir, libDir);
@@ -4477,7 +4477,7 @@ void oesenc_pi_event_handler::OnGetHWIDClick( wxCommandEvent &event )
         wxLogMessage(_T("oesenc_pi: Start Result: ") + result);
 
 #endif
-        
+
 }
 
 bool CheckEULA( void )
@@ -4485,116 +4485,116 @@ bool CheckEULA( void )
     wxLogMessage(_T("CheckEULA"));
     if(g_bEULA_Rejected)
         return false;
-    
+
     if(g_bEULA_OK && g_UserKey.Length())
         return true;
-       
+
     wxString shareLocn =*GetpSharedDataLocation() +
     _T("plugins") + wxFileName::GetPathSeparator() +
     _T("oesenc_pi") + wxFileName::GetPathSeparator();
-    
+
     oesenc_pi_about *pab = new oesenc_pi_about( GetOCPNCanvasWindow() );
     pab->ShowModal();
     g_bEULA_OK = (pab->GetReturnCode() == 0);
-    
+
 
     if(!g_bEULA_OK)
         wxLogMessage(_T("EULA Rejected."));
     else
         wxLogMessage(_T("EULA Accepted."));
-    
-    
+
+
     if(g_bEULA_OK && (0 == g_UserKey.Length()) )
         g_UserKey = _T("Pending");
-        
+
     pab->Destroy();
-    
+
     return g_bEULA_OK;
 }
 
 wxString getEULASha1( wxString fileName)
 {
     wxString result;
-    
+
     if(!::wxFileExists(fileName))
         return _T("");
-   
+
     wxTextFile eula_file( fileName );
     if( eula_file.Open() ){
-            
+
         wxArrayString sig_array;
         wxString line = eula_file.GetFirstLine();
-            
+
         while( !eula_file.Eof() ){
             sig_array.Add(line);
             line = eula_file.GetNextLine();
         }
-                
+
     //  Make one long string of the  file, to treat as a blob
         wxString eula_blob;
         for(unsigned int i=0 ; i < sig_array.Count() ; i++){
             wxString line = sig_array[i];
             eula_blob += line;
-        }                
+        }
 
         // calculate SHA1 of the blob
         wxCharBuffer blob_buf = eula_blob.ToUTF8();
-        
+
         SHA1Context sha1;
         uint8_t sha1sum[SHA1HashSize];
         SHA1Reset(&sha1);
-        
+
         SHA1Input(&sha1, (uint8_t *)blob_buf.data(), strlen( blob_buf.data()) );
         SHA1Result(&sha1, sha1sum);
-    
+
         for(int i=0 ; i < 20 ; i ++){
             wxString val;
             val.Printf(_T("%02X"), sha1sum[i]);
             result += val;
         }
-    }    
-    
+    }
+
     return result;
 }
-    
+
 bool ShowEULA( wxString fileName )
 {
     wxLogMessage(_T("ShowEULA"));
-    
+
     wxString sha = getEULASha1(fileName);
-    
+
     //  look in the session persistent array for a match
     for(unsigned int i=0 ; i < g_EULAShaArray.GetCount() ; i++){
         if(g_EULAShaArray[i] == sha)
             return true;
     }
-    
+
 #ifdef __OCPN__ANDROID__
     androidHideBusyIcon();
 #endif
-    
+
     oesenc_pi_about *pab = new oesenc_pi_about( GetOCPNCanvasWindow(), fileName );
     pab->ShowModal();
     bool bEULA_OK = (pab->GetReturnCode() == 0);
-    
+
     if(!bEULA_OK)
         wxLogMessage(_T("EULA Rejected."));
     else
         wxLogMessage(_T("EULA Accepted."));
-    
+
     if(bEULA_OK)
         g_EULAShaArray.Add(sha);
-    
+
     if(bEULA_OK && (0 == g_UserKey.Length()) )
         g_UserKey = _T("Pending");
-    
+
     pab->Destroy();
-    
+
     return bEULA_OK;
 }
 
-    
-            
+
+
 
 
 IMPLEMENT_DYNAMIC_CLASS( oesenc_pi_about, wxDialog )
@@ -4626,8 +4626,8 @@ oesenc_pi_about::oesenc_pi_about( wxWindow* parent, wxString fileName, wxWindowI
     m_fileName = fileName;
     Create(parent, id, caption, pos, size, style);
 }
-                                  
-                                  
+
+
 bool oesenc_pi_about::Create( wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos,
         const wxSize& size, long style )
 {
@@ -4643,7 +4643,7 @@ bool oesenc_pi_about::Create( wxWindow* parent, wxWindowID id, const wxString& c
 
     closeButton = NULL;
     rejectButton = NULL;
-        
+
     //m_displaySize = g_Platform->getDisplaySize();
     CreateControls();
     Populate();
@@ -4660,7 +4660,7 @@ void oesenc_pi_about::SetOKMode()
     if(rejectButton)
         rejectButton->Hide();
 }
-    
+
 #if 0
 void oesenc_pi_about::SetColorScheme( void )
 {
@@ -4669,7 +4669,7 @@ void oesenc_pi_about::SetColorScheme( void )
     pAboutHTMLCtl->SetBackgroundColour( bg );
     pLicenseHTMLCtl->SetBackgroundColour( bg );
     pAuthorHTMLCtl->SetBackgroundColour( bg );
-    
+
 
     // This looks like non-sense, but is needed for __WXGTK__
     // to get colours to propagate down the control's family tree.
@@ -4702,7 +4702,7 @@ void oesenc_pi_about::Populate( void )
             bg.Red(), bg.Blue(), bg.Green(), fg.Red(), fg.Blue(), fg.Green() );
 
     wxFont *dFont = GetOCPNScaledFont_PlugIn(_("Dialog"));
-    
+
     // Do weird font size calculation
     int points = dFont->GetPointSize();
 #ifndef __WXOSX__
@@ -4719,16 +4719,16 @@ void oesenc_pi_about::Populate( void )
         aboutText.Append( _T("<i>") );
 
 #if 0
-#ifdef __OCPN__ANDROID__    
+#ifdef __OCPN__ANDROID__
     aboutText.Append( AboutText + OpenCPNVersionAndroid  + OpenCPNInfoAlt );
 #else
     aboutText.Append( AboutText + OpenCPNVersion + OpenCPNInfo );
-#endif    
+#endif
 
     // Show where the log file is going to be placed
     wxString log_string = _T("Logfile location: ") + g_Platform->GetLogFileName();
     log_string.Replace(_T("/"), _T("/ "));      // allow line breaks, in a cheap way...
-    
+
     aboutText.Append( log_string );
 
     // Show where the config file is going to be placed
@@ -4744,27 +4744,27 @@ void oesenc_pi_about::Populate( void )
     aboutText.Append( _T("</font></body></html>") );
 
 //    pAboutHTMLCtl->SetPage( aboutText );
-    
-    
+
+
     ///Authors page
     // The HTML Header
     wxString authorText =
     wxString::Format(
         _T( "<html><body bgcolor=#%02x%02x%02x><font color=#%02x%02x%02x>" ),
                      bg.Red(), bg.Blue(), bg.Green(), fg.Red(), fg.Blue(), fg.Green() );
-    
+
 //    pAuthorHTMLCtl->SetFonts( face, face, sizes );
-    
-    
+
+
     wxString authorFixText = _T(""); //AuthorText;
     authorFixText.Replace(_T("\n"), _T("<br>"));
     authorText.Append( authorFixText );
-    
+
     // The HTML Footer
     authorText.Append( _T("</font></body></html>") );
 
 //    pAuthorHTMLCtl->SetPage( authorFixText );
-    
+
 
     ///License page
     // The HTML Header
@@ -4772,16 +4772,16 @@ void oesenc_pi_about::Populate( void )
     wxString::Format(
         _T( "<html><body bgcolor=#%02x%02x%02x><font color=#%02x%02x%02x>" ),
             bg.Red(), bg.Blue(), bg.Green(), fg.Red(), fg.Blue(), fg.Green() );
-        
+
     pLicenseHTMLCtl->SetFonts( face, face, sizes );
- 
+
     wxString shareLocn =*GetpSharedDataLocation() +
     _T("plugins") + wxFileName::GetPathSeparator() +
     _T("oesenc_pi") + wxFileName::GetPathSeparator();
-    
+
     wxFileName fn(m_fileName);
     bool bhtml = fn.GetExt().Upper() == _T("HTML");
-    
+
     wxTextFile license_filea( m_fileName );
     if ( license_filea.Open() ) {
         for ( wxString str = license_filea.GetFirstLine(); !license_filea.Eof() ; str = license_filea.GetNextLine() ){
@@ -4795,15 +4795,15 @@ void oesenc_pi_about::Populate( void )
         wxLogMessage( _T("Could not open oesenc_pi EULA: ") + m_fileName );
         closeButton->Disable();
     }
-    
-        
+
+
         // The HTML Footer
     licenseText.Append( _T("</font></body></html>") );
-        
+
     pLicenseHTMLCtl->SetPage( licenseText );
-    
+
     pLicenseHTMLCtl->SetBackgroundColour( bg );
-    
+
     #ifdef __WXQT__
     // wxQT has some trouble clearing the background of HTML window...
     wxBitmap tbm( GetSize().x, GetSize().y, -1 );
@@ -4812,9 +4812,9 @@ void oesenc_pi_about::Populate( void )
     tdc.Clear();
     pLicenseHTMLCtl->SetBackgroundImage(tbm);
     #endif
-    
-        
-#if 0    
+
+
+#if 0
     wxTextFile license_file( m_DataLocn + _T("license.txt") );
     if ( license_file.Open() ) {
         for ( wxString str = license_file.GetFirstLine(); !license_file.Eof() ; str = license_file.GetNextLine() )
@@ -4823,10 +4823,10 @@ void oesenc_pi_about::Populate( void )
     } else {
         wxLogMessage( _T("Could not open License file: ") + m_DataLocn );
     }
-    
+
     wxString suppLicense = g_Platform->GetSupplementalLicenseString();
     pLicenseTextCtl->AppendText( suppLicense );
-    
+
     pLicenseTextCtl->SetInsertionPoint( 0 );
 #endif
 
@@ -4836,22 +4836,22 @@ void oesenc_pi_about::Populate( void )
 void oesenc_pi_about::RecalculateSize( void )
 {
     //  Make an estimate of the dialog size, without scrollbars showing
-    
+
     wxSize esize;
     esize.x = GetCharWidth() * 110;
     esize.y = GetCharHeight() * 44;
-    
+
     wxSize dsize = GetParent()->GetClientSize();
     esize.y = wxMin(esize.y, dsize.y - (2 * GetCharHeight()));
     esize.x = wxMin(esize.x, dsize.x - (1 * GetCharHeight()));
     SetClientSize(esize);
-    
+
     wxSize fsize = GetSize();
     fsize.y = wxMin(fsize.y, dsize.y - (2 * GetCharHeight()));
     fsize.x = wxMin(fsize.x, dsize.x - (1 * GetCharHeight()));
-    
+
     SetSize(fsize);
-    
+
     Centre();
 }
 
@@ -4868,32 +4868,32 @@ void oesenc_pi_about::CreateControls( void )
         wxSize( -1, 50 /* 500, 30 */ ), wxALIGN_CENTRE /* | wxALIGN_CENTER_VERTICAL */ );
 
     wxFont *qFont = GetOCPNScaledFont_PlugIn(_("Dialog"));
-    
+
     wxFont *headerFont = qFont;// FontMgr::Get().FindOrCreateFont( 14, wxFONTFAMILY_DEFAULT, qFont->GetStyle(), wxFONTWEIGHT_BOLD, false, qFont->GetFaceName() );
-    
+
     pST1->SetFont( *headerFont );
     mainSizer->Add( pST1, 0, wxALL | wxEXPAND, 8 );
 
-#ifndef __OCPN__ANDROID__    
+#ifndef __OCPN__ANDROID__
     wxSizer *buttonSizer = new wxBoxSizer( wxHORIZONTAL /*m_displaySize.x < m_displaySize.y ? wxVERTICAL : wxHORIZONTAL*/ );
     mainSizer->Add( buttonSizer, 0, wxALL, 0 );
-    
+
 //     wxButton* donateButton = new wxBitmapButton( this, ID_DONATE,
 //             g_StyleManager->GetCurrentStyle()->GetIcon( _T("donate") ),
 //             wxDefaultPosition, wxDefaultSize, 0 );
-// 
+//
 //     buttonSizer->Add( new wxButton( this, ID_COPYLOG, _T("Copy Log File to Clipboard") ), 1, wxALL | wxEXPAND, 3 );
 //     buttonSizer->Add( new wxButton( this, ID_COPYINI, _T("Copy Settings File to Clipboard") ), 1, wxALL | wxEXPAND, 3 );
 //     buttonSizer->Add( donateButton, 1, wxALL | wxEXPAND | wxALIGN_RIGHT, 3 );
 #endif
-    
+
     //  Main Notebook
     pNotebook = new wxNotebook( this, ID_NOTEBOOK_HELP, wxDefaultPosition,
             wxSize( -1, -1 ), wxNB_TOP );
     pNotebook->InheritAttributes();
     mainSizer->Add( pNotebook, 1, wxALIGN_CENTER_VERTICAL | wxEXPAND | wxALL, 5 );
 
-#if 0    
+#if 0
     //  About Panel
     itemPanelAbout = new wxPanel( pNotebook, -1, wxDefaultPosition, wxDefaultSize,
             wxSUNKEN_BORDER | wxTAB_TRAVERSAL );
@@ -4920,22 +4920,22 @@ void oesenc_pi_about::CreateControls( void )
     wxBoxSizer* authorSizer = new wxBoxSizer( wxVERTICAL );
     authorSizer->Add( pAuthorHTMLCtl, 1, wxALIGN_CENTER_HORIZONTAL | wxEXPAND | wxALL, 5 );
     itemPanelAuthors->SetSizer( authorSizer );
-#endif    
-    
+#endif
+
 
     //  License Panel
     itemPanelLicense = new wxPanel( pNotebook, -1, wxDefaultPosition, wxDefaultSize,
             wxSUNKEN_BORDER | wxTAB_TRAVERSAL );
     itemPanelLicense->InheritAttributes();
     pNotebook->AddPage( itemPanelLicense, _("License") );
-    
+
     pLicenseHTMLCtl = new wxHtmlWindow( itemPanelLicense, wxID_ANY, wxDefaultPosition, wxDefaultSize,
                                       wxHW_SCROLLBAR_AUTO | wxHW_NO_SELECTION);
     pLicenseHTMLCtl->SetBorders( 5 );
     wxBoxSizer* licenseSizer = new wxBoxSizer( wxVERTICAL );
     licenseSizer->Add( pLicenseHTMLCtl, 1, wxALIGN_CENTER_HORIZONTAL | wxEXPAND | wxALL, 5 );
     itemPanelLicense->SetSizer( licenseSizer );
-    
+
 #if 0
     //  Help Panel
     itemPanelTips = new wxPanel( pNotebook, -1, wxDefaultPosition, wxDefaultSize,
@@ -4950,8 +4950,8 @@ void oesenc_pi_about::CreateControls( void )
     //   Buttons
     wxSizer *buttonBottomSizer = new wxBoxSizer( wxHORIZONTAL );
     mainSizer->Add( buttonBottomSizer, 0, wxALL, 5 );
-    
-    
+
+
     closeButton = new wxButton( this, xID_OK, _("Accept"), wxDefaultPosition, wxDefaultSize, 0 );
     closeButton->SetDefault();
     closeButton->InheritAttributes();
@@ -4960,8 +4960,8 @@ void oesenc_pi_about::CreateControls( void )
     rejectButton = new wxButton( this, xID_CANCEL, _("Reject"), wxDefaultPosition, wxDefaultSize, 0 );
     rejectButton->InheritAttributes();
     buttonBottomSizer->Add( rejectButton, 0, wxEXPAND | wxALL, 5 );
-    
-     
+
+
 }
 
 
@@ -4993,21 +4993,21 @@ void showChartinfoDialog( void )
 {
     if(g_binfoShown)
         return;
-    
+
     if(info_hash.empty())
         return;
-    
+
     wxString hdr = _T("<html><body><center><font size=+1>");
     hdr +=  _("Available Chart sets:");
     hdr += _T("</font></center>");
-    
+
     hdr += _T("<hr />");
-    
+
     hdr += _T("<center><table border=0 bordercolor=#000000 style=background-color:#fbfbf9 width=800 cellpadding=1 cellspacing=1>");
-    
+
     hdr += _T("<tr>");
     hdr += _T("</tr>");
-   
+
     int len_max = 0;
     int ncs = 1;
     std::map<std::string, ChartInfoItem *>::iterator iter;
@@ -5015,40 +5015,40 @@ void showChartinfoDialog( void )
     {
         wxString csn;
         csn.Printf(_T("Chart set %d"), ncs);
-        
+
         hdr += _T("<td><font size=+2>");
         hdr += csn;
         hdr += _T("</font></td>");
-        
+
         wxString formatted;
-        
+
         ChartInfoItem *pci = iter->second;
         std::string key = iter->first;
         wxString strk = wxString(key.c_str(), wxConvUTF8);
         wxString info = pci->config_string;
         len_max = wxMax(info.Len(), len_max);
-        
-        
+
+
         // Get the line fields
          wxStringTokenizer tkx(info, _T(";"));
          while ( tkx.HasMoreTokens() ){
             wxString token = tkx.GetNextToken();        //description
             hdr += _T("<tr><td>  ") + token + _T("</td></tr>");
-                    
+
             token = tkx.GetNextToken();         // version
             hdr += _T("<tr><td>Version:</td></tr>");
             hdr += _T("<tr><td align=\"right\">") + token + _T("</td></tr>");
-            
+
             token = tkx.GetNextToken();         // expiry date
             hdr += _T("<tr><td>Valid Until:</td></tr>");
             hdr += _T("<tr><td align=\"right\"> <font color=#ff0000>") + token + _T("</font><font color=#000000></font></td></tr>");
          }
-        
+
         ncs++;
         hdr += _T("</tr>");
-        
+
     }
- 
+
     hdr += _T("</table></center>");
     hdr += _T("</body></html>");
 
@@ -5062,88 +5062,88 @@ void showChartinfoDialog( void )
 {
     if(g_binfoShown)
         return;
-    
+
     if(info_hash.empty())
         return;
-    
+
     wxString hdr = _T("<html><body><center><font size=+2>");
     hdr +=  _("The following Chart sets are available:");
     hdr += _T("</font></center>");
-    
+
     hdr += _T("<hr />");
-    
+
     hdr += _T("<center><table border=0 bordercolor=#000000 style=background-color:#fbfbf9 width=600 cellpadding=3 cellspacing=3>");
-    
+
     hdr += _T("<tr>");
-    
+
     hdr += _T("<td><font size=+2>");
     hdr += _("Chart set");
     hdr += _T("</font></td>");
-    
+
     hdr += _T("<td><font size=+2>");
     hdr += _("Version");
     hdr += _T("</font></td>");
-    
+
     hdr += _T("<td><font size=+2>");
     hdr += _("Valid until");
     hdr += _T("</font></td>");
-    
+
     hdr += _T("</tr>");
-    
+
     int len_max = 0;
     std::map<std::string, ChartInfoItem *>::iterator iter;
     for( iter = info_hash.begin(); iter != info_hash.end(); ++iter )
     {
         wxString formatted;
-        
+
         ChartInfoItem *pci = iter->second;
         std::string key = iter->first;
         wxString strk = wxString(key.c_str(), wxConvUTF8);
         wxString info = pci->config_string;
         len_max = wxMax(info.Len(), len_max);
-        
+
         hdr += _T("<tr>");
-        
+
         // Get the line fields
         wxStringTokenizer tkx(info, _T(";"));
         while ( tkx.HasMoreTokens() ){
             wxString token = tkx.GetNextToken();        //description
             hdr += _T("<td>") + token + _T("</td>");
-            
+
             token = tkx.GetNextToken();         // version
             hdr += _T("<td>") + token + _T("</td>");
-            
+
             token = tkx.GetNextToken();         // expiry date
             wxDateTime exdate;
             exdate.ParseDate(token);
             wxTimeSpan diff = exdate - wxDateTime::Today();
             // Expired? Red text
             hdr += diff > 0 ? _T("<td>") + token + _T("</td>") :
-                              _T("<td><font color=#ff0000>") + token + _T("</font></td>");            
+                              _T("<td><font color=#ff0000>") + token + _T("</font></td>");
         }
-        
+
         hdr += _T("</tr>");
     }
-    
+
     hdr += _T("</table></center>");
     hdr += _T("</body></html>");
-    
+
     if(GetOCPNCanvasWindow()){
         wxFont *pFont = OCPNGetFont(_T("Dialog"), 12);
         wxScreenDC dc;
         int sx, sy;
         dc.GetTextExtent(_T("W"), &sx, &sy, NULL, NULL, pFont);
-        
+
         //        int parent_font_width = sx;
         //         wxSize sz = wxSize(len_max * parent_font_width * 1.2, -1);
-        
+
         pinfoDlg = new OESENC_HTMLMessageDialog( NULL /*GetOCPNCanvasWindow()*/, hdr, _("oeSENC_PI Message"), wxOK);
         //        pinfoDlg->SetClientSize(sz);
         pinfoDlg->Centre();
         pinfoDlg->Show();
         g_binfoShown = true;
     }
-    
+
 }
 #endif
 
@@ -5151,35 +5151,35 @@ void showChartinfoDialog( void )
 bool processChartinfo(const wxString &oesenc_file)
 {
     wxLogMessage(_T("processChartInfo ") + oesenc_file);
-    
+
     // Do not process anything if a EULA has been rejected
     if(g_bEULA_Rejected)
         return false;
-    
+
     // get the Chartinfo as a wxTextFile
     wxFileName fn(oesenc_file);
     wxString chartInfoDir = fn.GetPath(  wxPATH_GET_VOLUME + wxPATH_GET_SEPARATOR );
     wxString chartInfo = chartInfoDir + _T("Chartinfo.txt");
 
     if(wxFileExists(chartInfo)){
-        
+
     // Have we processed this exact ChartInfo file in this session?
     // If so, all is well
         if( wxNOT_FOUND != g_ChartInfoArray.Index( chartInfo))
             return true;
-    
+
         g_ChartInfoArray.Add(chartInfo);
-    
+
     }
     else
         return true;                    // no ChartInfo file at all
-        
-        
+
+
     // First, consider the EULA
     wxTextFile info_file( chartInfo );
     if( info_file.Open() ){
         wxString line = info_file.GetFirstLine();
-        
+
         wxString fileEULA, sshowEULA, fullEULAFileName;
         wxArrayString EULAFileArray;
         while( !info_file.Eof() ){
@@ -5187,15 +5187,15 @@ bool processChartinfo(const wxString &oesenc_file)
                 wxString tentativeFileEULA = line.AfterFirst(':').Trim(false);
                 EULAFileArray.Add(tentativeFileEULA);
             }
- 
+
             else if(line.StartsWith( _T("oesencEULAShow:" ) ) ) {
-                sshowEULA = line.AfterFirst(':').Trim(false).Trim(); 
-                
+                sshowEULA = line.AfterFirst(':').Trim(false).Trim();
+
             }
-     
+
             if( (EULAFileArray.GetCount()) && (sshowEULA.Length())){
                 ChartSetEULA *CSE;
-                
+
                 if(EULAFileArray.GetCount()){               // might be localized EULA files
                     wxString loc = GetLocaleCanonicalName();
                     wxString loc2 = loc.Mid(0,2).Upper();
@@ -5212,7 +5212,7 @@ bool processChartinfo(const wxString &oesenc_file)
                         }
                     }
                 }
-                
+
                 //  Some trouble with localized EULA? If so, find the first really available file in the array
                 if(!fileEULA.Length()){
                     for(unsigned int iloc = 0 ;  iloc < EULAFileArray.GetCount() ; iloc++){
@@ -5222,12 +5222,12 @@ bool processChartinfo(const wxString &oesenc_file)
                         }
                     }
                 }
-                
+
                 fullEULAFileName = chartInfoDir + fileEULA;
 
                 wxString subEULAFileName = fullEULAFileName;
                 subEULAFileName.Replace(wxFileName::GetPathSeparator(), '!');
-                
+
                 //  Search the EULA array loaded from config file for a match
                 bool b_found = false;
                 for(unsigned int i=0 ; i < g_EULAArray.GetCount() ; i++){
@@ -5239,39 +5239,39 @@ bool processChartinfo(const wxString &oesenc_file)
                         break;
                     }
                 }
-                
+
                 //  If not found, this is a EULA definition coming for the first time
                 //  So add it to the global array to be persisted later.
                 if(!b_found){
                     if(g_debugLevel) wxLogMessage(_T("not found, so adding...") + subEULAFileName);
-                    
+
                     ChartSetEULA *cse = new ChartSetEULA;
                     cse->fileName = subEULAFileName;
                     if(sshowEULA.Upper().Find(_T("ONCE")) != wxNOT_FOUND)
                         cse->npolicyShow = 1;
                     else if(sshowEULA.Upper().Find(_T("ALWAYS")) != wxNOT_FOUND)
                         cse->npolicyShow = 2;
-                    else 
+                    else
                         cse->npolicyShow = 0;
-                    
+
                     g_EULAArray.Add(cse);
                     CSE = cse;
                 }
-                
+
                 //  If the EULA is required to be shown, either once or always, do it here
                 bool b_show = false;
                 if( (CSE->npolicyShow == 1) && (!CSE->b_onceShown))       // once per lifetime
                     b_show = true;
                 if( (CSE->npolicyShow == 2) && (!CSE->b_sessionShown))    // once per session
                     b_show = true;
-                
+
                 bool b_showResult = false;
                 if(b_show){
                     wxString file = CSE->fileName;
                     file.Replace('!', wxFileName::GetPathSeparator());
-                    
+
                     b_showResult = ShowEULA(file);
-                    
+
                     if(!b_showResult){
                         g_bEULA_Rejected = true;
                         return false;                   // User did not accept EULA, or file missing
@@ -5281,42 +5281,42 @@ bool processChartinfo(const wxString &oesenc_file)
                         CSE->b_onceShown = true;
                     }
                 }
-                
+
                 //  Done with this EULA
                 fullEULAFileName.Clear();
                 sshowEULA.Clear();
                 EULAFileArray.Clear();
             }
-            
+
             line = info_file.GetNextLine();
         }
     }
-    
+
     std::string key = std::string(fn.GetPath(wxPATH_GET_VOLUME + wxPATH_GET_SEPARATOR).c_str());
-    
+
     if(wxFileExists(chartInfo)){
         wxTextFile info_file( chartInfo );
         if( info_file.Open() ){
-            
+
             //ChartInfo:Oesenc Charts Test Edition (UK_EU);2016/3;2016-09-30
             int nkey = 1;
             wxString line = info_file.GetFirstLine();
-        
+
             while( !info_file.Eof() ){
                 if(line.StartsWith( _T("ChartInfo:" ) ) ) {
                     wxString content = line.AfterFirst(':');
-                
+
                     wxString keyn = fn.GetPath(wxPATH_GET_VOLUME + wxPATH_GET_SEPARATOR);
                     wxString ncnt;
                     ncnt.Printf(_T("K%d"), nkey);
                     keyn.Prepend( ncnt );
                     if(g_debugLevel) wxLogMessage(_T("processChartInfo considering: ") + keyn);
-                    
+
                     keyn.Replace(wxFileName::GetPathSeparator(), '!');
-                    
+
                     std::string key = std::string(keyn.c_str());
                     std::map<std::string, ChartInfoItem *>::iterator iter;
-                
+
                     iter = info_hash.find( key );
                     if( iter == info_hash.end() ){
                         ChartInfoItem *pitem = new ChartInfoItem;
@@ -5324,82 +5324,82 @@ bool processChartinfo(const wxString &oesenc_file)
                         info_hash[key] = pitem;
                         if(g_debugLevel) wxLogMessage(_T("processChartInfo adding: ") + keyn);
                         wxLogMessage(_T("processChartInfo adding config_string: ") + content);
-                        
+
                         g_binfoShown = false;                           // added a line, so force re-display
                     }
                     else{
                         if(g_debugLevel) wxLogMessage(_T("processChartInfo found: ") + keyn);
                     }
-                    
+
                     nkey++;
                 }
-        
+
                 line = info_file.GetNextLine();
-                
+
             }
         }
-        
-             
-        return true;    
+
+
+        return true;
     }
     else
         return false;
-                
+
 }
 
 
 void processUserKeyHint(const wxString &oesenc_file)
 {
     if(g_debugLevel) wxLogMessage(_T("processUserKeyHint() start."));
-                                     
+
     // get the Chartinfo as a wxTextFile
     wxFileName fn(oesenc_file);
     wxString userkey = fn.GetPath(  wxPATH_GET_VOLUME + wxPATH_GET_SEPARATOR );
     userkey += _T("Chartinfo.txt");
-    
+
     if(!wxFileExists(userkey))
         return;
-        
+
     wxTextFile info_file( userkey );
     if( info_file.Open() ){
         wxString line = info_file.GetFirstLine();
-        
+
         while( !info_file.Eof() ){
             if(line.StartsWith( _T("UserKey:" ) ) ) {
                 wxString content = line.AfterFirst(':').Trim().Trim(false);
                 g_UserKey = content;
                 if(g_debugLevel) wxLogMessage(_T("processUserKeyHint: taking UserKey: ") + content);
-                                                 
+
                 break;
             }
-            
+
             line = info_file.GetNextLine();
         }
-        
+
         g_bUserKeyHintTaken = true;
     }
-    
+
     if(g_debugLevel) wxLogMessage(_T("processUserKeyHint() done. g_UserKey: ") + g_UserKey);
 }
 
 bool ShowAlwaysEULAs()
 {
     bool b_showResult = true;
-    
+
     ChartSetEULA *CSE;
-    
+
     for(unsigned int i=0 ; i < g_EULAArray.GetCount() ; i++){
         CSE = g_EULAArray.Item(i);
         if(CSE->npolicyShow == 2){
             wxString file = CSE->fileName;
             file.Replace('!', wxFileName::GetPathSeparator());
-            
+
             b_showResult = ShowEULA(file);
             if(!b_showResult)
                 return false;
         }
     }
-    
+
     return true;
 }
 
@@ -5408,17 +5408,17 @@ void androidShowBusyIcon()
 {
 //    if(b_androidBusyShown)
 //        return;
-    
+
     //  Get a reference to the running native activity
      QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative",
         "activity", "()Landroid/app/Activity;");
 
      if ( !activity.isValid() )
          return;
-        
+
         //  Call the desired method
      QAndroidJniObject data = activity.callObjectMethod("showBusyCircle", "()Ljava/lang/String;");
-        
+
 //     b_androidBusyShown = true;
 }
 
@@ -5426,17 +5426,17 @@ void androidHideBusyIcon()
 {
 //    if(!b_androidBusyShown)
 //        return;
-    
+
     //  Get a reference to the running native activity
     QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative",
         "activity", "()Landroid/app/Activity;");
-        
+
     if ( !activity.isValid() )
         return;
-        
+
         //  Call the desired method
     QAndroidJniObject data = activity.callObjectMethod("hideBusyCircle", "()Ljava/lang/String;");
-        
+
 //    b_androidBusyShown = false;
 }
 #endif
@@ -5454,9 +5454,9 @@ void oesenc_pi::OnSetupOptions( void )
     }
     wxBoxSizer *sizer = new wxBoxSizer( wxVERTICAL );
     m_pOptionsPage->SetSizer( sizer );
-    
+
     m_oesencpanel = new oesencPanel( this, m_pOptionsPage, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE );
-    
+
     m_pOptionsPage->InvalidateBestSize();
     sizer->Add( m_oesencpanel, 1, wxALL | wxEXPAND );
     m_oesencpanel->FitInside();
@@ -5469,9 +5469,9 @@ void oesenc_pi::OnSetupOptions( void )
     }
     wxBoxSizer *sizer = new wxBoxSizer( wxVERTICAL );
     m_pOptionsPage->SetSizer( sizer );
-    
+
     m_shoppanel = new shopPanel( m_pOptionsPage, wxID_ANY, wxDefaultPosition, wxDefaultSize );
-    
+
     m_pOptionsPage->InvalidateBestSize();
     sizer->Add( m_shoppanel, 1, wxALL | wxEXPAND );
     m_shoppanel->FitInside();
@@ -5481,37 +5481,37 @@ void oesenc_pi::OnSetupOptions( void )
 
 oesencPanel::oesencPanel( oesenc_pi* plugin, wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxPanel( parent, id, pos, size, style )
 {
-    
+
     int border_size = 2;
-    
+
     //   Main Sizer
     wxBoxSizer* mainSizer = new wxBoxSizer( wxVERTICAL );
     SetSizer( mainSizer );
-    
+
     //  Buttons
     mainSizer->AddSpacer(20);
     wxBoxSizer* bSizerBtns = new wxBoxSizer( wxVERTICAL );
     mainSizer->Add( bSizerBtns, 0, wxALL | wxEXPAND | wxALIGN_CENTER_VERTICAL, border_size );
-    
+
     m_bManageCharts = new wxButton( this, wxID_ANY, _("Add/Update oeSENC chartsets"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
     //m_bManageCharts->SetToolTip( _("Add a new chart catalog.") );
     bSizerBtns->Add( m_bManageCharts, 0, wxALL|wxEXPAND, 20 );
     bSizerBtns->AddSpacer(20);
-    
+
     m_bVisitOcharts = new wxButton( this, wxID_ANY, _("Visit o-charts.org Website"), wxDefaultPosition, wxDefaultSize, 0 );
     m_bVisitOcharts->SetToolTip( _("Here you may order new oeSENC chartsets.") );
     bSizerBtns->Add( m_bVisitOcharts, 0, wxALL|wxEXPAND, 20 );
     bSizerBtns->AddSpacer(20);
-    
+
     m_bCreateHWID = new wxButton( this, wxID_ANY, _T("Create HWID (ADMIN mode)"), wxDefaultPosition, wxDefaultSize, 0 );
     bSizerBtns->Add( m_bCreateHWID, 0, wxALL|wxEXPAND, 20 );
     bSizerBtns->AddSpacer(20);
     if(!g_admin)
         m_bCreateHWID->Hide();
-    
+
     this->Layout();
-    
-    
+
+
     // Connect Events
     m_bManageCharts->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( oesencPanel::ManageCharts ), NULL, this );
     m_bVisitOcharts->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( oesencPanel::VisitOCharts ), NULL, this );
@@ -5526,15 +5526,15 @@ void oesencPanel::ManageCharts( wxCommandEvent &evt )
 {
     if(g_event_handler)
         g_event_handler->OnManageShopClick(evt);
-    
+
 }
 
 void oesencPanel::VisitOCharts( wxCommandEvent &evt )
 {
-#ifdef __OCPN__ANDROID__    
+#ifdef __OCPN__ANDROID__
     qDebug() << "VisitOCharts";
     callActivityMethod_ss("launchBrowser", _T("http://o-charts.org"));
-#endif    
+#endif
 }
 
 void oesencPanel::CreateHWID( wxCommandEvent &evt )
