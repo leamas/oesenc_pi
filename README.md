@@ -19,6 +19,8 @@ includes some general clean-up:
      it's own data directory even if relocated to a new location.
    - Ensure that LD\_LIBRARY\_PATH is not overwritten by plugin if it's
      already set.
+   - Use the new find\_in\_path() function to locate binary helpers as a
+     fallback if hardcoded paths does not work.
    - Ensure that plugin does not link to libraries outside the git tree,
      in particular the msvc opencpn.lib import library.
 
@@ -47,13 +49,17 @@ most (all?) plugins. Just searching for this and replacing it with
 getPluginDataDir() should make it. Note that the signature differs, though.
 
 Modifying *LD_LIBRARY_PATH* should be avoided if possible. If it still needs
-to be done it must respect existing value, possibly adding to it.
+to be done it must respect existing value, possibly adding to it. The new
+loader sets LD\_LIBRARY\_PATH so includes location of plugin libraries. 
+
+The new loader sets PATH so it contains the library with plugin binaries.
 
 The tar.gz package is the package used by new installer. It's just the
 contents of the installation directory created by *make install*.
 
 The XML metadata file is the basis for how plugins are made available for
-installation for users. Created by cmake, simple boilerplate code.
+installation for users. Created by cmake, simple boilerplate code. The name
+in the XML file should match the plugin's GetCommonName, but lowercase.
 
 The *CI integration* should build the plugins and deploy them together with
 teh XML metadata file on a public website.
