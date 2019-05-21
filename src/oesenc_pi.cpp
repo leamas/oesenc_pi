@@ -653,6 +653,15 @@ int oesenc_pi::Init(void)
     //        Specify the location of the oeserverd helper.
     wxFileName fn_exe(GetOCPN_ExePath());
     g_sencutil_bin = fn_exe.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR) + _T("oeserverd");
+    if (!wxFileExists(g_sencutil_bin)) {
+        std::string path(find_in_path("oeserverd"));
+        if (path == "") {
+            wxLogWarning("Cannot locate oeserverd binary in $PATH");
+        }
+        else {
+            g_sencutil_bin = wxString(path.c_str());
+        }
+    }
 
 
 #ifdef __WXMSW__
@@ -671,16 +680,6 @@ int oesenc_pi::Init(void)
     wxFileName fnl(piLocn);
     g_sencutil_bin = fnl.GetPath(wxPATH_GET_SEPARATOR) + _T("oeserverda");
     g_serverProc = 0;
-#endif
-
-#ifdef __linux__
-    std::string path(find_in_path("oeserverd"));
-    if (path == "") {
-	wxLogWarning("Cannot locate oeserverd binary in $PATH");
-    }
-    else {
-        g_sencutil_bin = wxString(path.c_str());
-    }
 #endif
 
 #if !defined(__WXMSW__) && !defined(__WXMAC__)
