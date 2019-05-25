@@ -39,11 +39,16 @@
     "files":
         [
             {
-                "includePattern": "build/(oesenc.*\\.tar.gz)",
+                "includePattern": "build/(orvar.tar.gz)",
                 "uploadPattern": "$1",
                 "matrixParams": {"override": 1}
             },
             {
+                "includePattern": "build/(oesenc.*\\.tar.gz)",
+                "uploadPattern": "$1",
+                "matrixParams": {"override": 1}
+            },
+             {
                 "includePattern": "build/(oesenc-plugin\\.xml)",
                 "uploadPattern": "$1",
                 "matrixParams": {"override": 1}

@@ -23,5 +23,7 @@ cmake -DOCPN_CI_BUILD=$CI_BUILD \
   -DCMAKE_INSTALL_PREFIX=/tmp/opencpn -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 \
   ..
 make -sj2
+make DESTDIR=orvar install
+tar czf orvar.tar.gz orvar
 make package
 chmod 644 /usr/local/lib/lib*.dylib
