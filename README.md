@@ -38,7 +38,7 @@ Most of these changes should be trivial given the boilerplate code available
 here. The last part, flatpak, is somewhat more work and also requires a
 linux platform to run.
 
-Some notes on the changes:
+## Some notes on the changes:
 
 The *new API* is available in the directory api-16 which also contains
 an msvc import library. Note that the plugin must link against these
@@ -50,7 +50,7 @@ getPluginDataDir() should make it. Note that the signature differs, though.
 
 Modifying *LD_LIBRARY_PATH* should be avoided if possible. If it still needs
 to be done it must respect existing value, possibly adding to it. The new
-loader sets LD\_LIBRARY\_PATH so includes location of plugin libraries. 
+loader sets LD\_LIBRARY\_PATH so includes location of plugin libraries.
 
 The new loader sets PATH so it contains the library with plugin binaries.
 
@@ -72,3 +72,29 @@ upstreamed or in a fork.
 The *mingw* fixes and *fedora builder* are not relevant to the general case.
 mingw is anyway broken in this plugin, and the fedora builder is by no
 means necessary.
+
+## Testing
+
+  - Make a copy of the file ocpn-plugins.xml which is installed in the
+    opencpn data directory.
+
+  - Add the metadata XML file produced by the build to this file, see
+    the other examples. Install the file in the private data directory
+    (~/.opencpn on linux %LOCALAPPDATA% on Windows).
+
+  - Check that the new plugin is available using
+    `opencpn --plugin_list_available` on the command line. It should list
+    the new plugin.
+
+  - Try to install the new plugin using `opencpn --plugin_install <nr>`
+    where the nr is as listed by --plugin_list_available.
+
+  - Check the log file for errors after restarting opencpn. Is the new
+    plugin actually loaded? Does it work?
+
+  - Check that the new plugin is installed using
+    `opencpn --plugin_list_installed`.
+
+  - Check that the plugin can be removed using
+    `opencpn --plugin_uninstall <nr>`, the nr as of --plugin_list_installed.
+
