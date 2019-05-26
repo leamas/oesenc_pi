@@ -23,6 +23,7 @@ includes some general clean-up:
      fallback if hardcoded paths does not work.
    - Ensure that plugin does not link to libraries outside the git tree,
      in particular the msvc opencpn.lib import library.
+   - Ensure that plugin is installed in sane paths, in particular on Mac.
 
 And some new functionality:
 
@@ -69,6 +70,12 @@ more work, but basically also boilerplate code. Making a flatpak plugin
 is much easier if a version with the other fixes is available in a git repo,
 upstreamed or in a fork.
 
+The *installation paths* is so far only known to be a problem on Mac. Here
+dynamic libraries (.dylib), regular .so libs and binaries should live in
+*.../Contents/PlugIns*. Language .lproj directories should got to
+*.../Contents/Resources*. The plugin data should reside in
+*.../Contents/SharedSupport/Plugins/\<plugin\>*. 
+
 The *mingw* fixes and *fedora builder* are not relevant to the general case.
 mingw is anyway broken in this plugin, and the fedora builder is by no
 means necessary.
@@ -97,4 +104,23 @@ means necessary.
 
   - Check that the plugin can be removed using
     `opencpn --plugin_uninstall <nr>`, the nr as of --plugin_list_installed.
+
+  - flatpak setup:
+     - Update url and commit in org.OpenCPN.opencpn.yaml
+     - make, make install, make publish.
+     - flatpak install website/opencpn.flatpakref.
+     - flatpak run --command=sh --share=network --devel org.opencpn.OpenCPN
+
+## Examples and Links
+
+Besides this plugin:
+
+ - https://github.com/leamas/radar_pi/ is a much simpler,  easier
+   to understand example.
+
+ - OpenCPN test builds with new plugin loader:
+   https://sourceforge.net/projects/opencpn-devel/files/5.0.0-post/
+
+ - Published plugins in new format:
+   https://bintray.com/leamas/OpenCPN/plugins/view/files#files/
 
